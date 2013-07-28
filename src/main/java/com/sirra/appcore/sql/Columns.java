@@ -6,8 +6,8 @@ import java.util.*;
 import org.hibernate.*;
 import org.hibernate.metadata.*;
 
-import com.ming.server.json.*;
-import com.ming.server.session.*;
+import com.sirra.server.json.*;
+import com.sirra.server.session.*;
 
 /**
  * Defines the columns in an SqlSearch.
@@ -30,7 +30,7 @@ public class Columns {
 		
 		this.entityClass = entityClass;
 		
-		SessionFactory sf = MingSession.get().getHibernateSession().getSessionFactory();
+		SessionFactory sf = SirraSession.get().getHibernateSession().getSessionFactory();
 		ClassMetadata classMetadata = sf.getClassMetadata(entityClass);
 		String[] propertyNames = classMetadata.getPropertyNames();
 		

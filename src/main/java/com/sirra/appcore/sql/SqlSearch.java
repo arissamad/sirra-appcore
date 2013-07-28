@@ -4,9 +4,9 @@ import java.util.*;
 
 import org.hibernate.*;
 
-import com.ming.server.json.*;
-import com.ming.server.session.*;
-import com.ming.server.templating.*;
+import com.sirra.server.json.*;
+import com.sirra.server.session.*;
+import com.sirra.server.templating.*;
 
 /**
  * Calls raw SQL. Provides these additional services:
@@ -34,7 +34,7 @@ public class SqlSearch {
 		}
 		sql = construct(sql, sqlParams);
 		
-		SQLQuery query = MingSession.get().getHibernateSession().createSQLQuery(sql);
+		SQLQuery query = SirraSession.get().getHibernateSession().createSQLQuery(sql);
 		
 		query.setFirstResult(sqlParams.getStartIndex());
 		query.setMaxResults(sqlParams.getNumItemsToRetrieve());
@@ -87,10 +87,10 @@ public class SqlSearch {
 	 */
 	protected static String construct(String sql, SqlParams sqlParams) {
 
-		MingSession ms = MingSession.get();
+		SirraSession ss = SirraSession.get();
 		
-		if(ms.hasAccount()) {
-			String accountId = ms.getAccountId();
+		if(ss.hasAccount()) {
+			String accountId = ss.getAccountId();
 			
 			int fromN = sql.toLowerCase().indexOf("from ") + "from".length();
 			int obN = sql.toLowerCase().indexOf("order by");

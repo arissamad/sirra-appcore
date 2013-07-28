@@ -2,7 +2,7 @@ package com.sirra.appcore.dailyprocess;
 
 import java.util.*;
 
-import com.ming.server.session.*;
+import com.sirra.server.session.*;
 import com.sirra.appcore.util.*;
 
 /**
@@ -81,12 +81,12 @@ public class DailyProcess implements Runnable {
 				
 				try {
 					System.out.println(" -- DailyProcess: Running " + dailyProcessor.getClass().getSimpleName());
-					MingSession.start();
+					SirraSession.start();
 					dailyProcessor.process();
-					MingSession.end();
+					SirraSession.end();
 				} catch(Exception e) {
 					StackTrace.notify(e, "Problem with dailyProcessor: ");
-					MingSession.rollback();
+					SirraSession.rollback();
 				}
 				
 				

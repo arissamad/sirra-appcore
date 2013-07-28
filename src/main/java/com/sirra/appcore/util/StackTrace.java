@@ -1,6 +1,6 @@
 package com.sirra.appcore.util;
 
-import com.ming.server.templating.*;
+import com.sirra.server.templating.*;
 import com.sirra.appcore.email.*;
 
 /** 

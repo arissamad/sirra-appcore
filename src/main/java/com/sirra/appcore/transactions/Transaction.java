@@ -4,7 +4,7 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import com.ming.server.session.*;
+import com.sirra.server.session.*;
 import com.sirra.appcore.accounts.*;
 
 /**
@@ -35,7 +35,7 @@ public class Transaction extends AccountEnabled {
 	
 	public Transaction() {
 		creationDate = new Date();
-		accountId = MingSession.get().getAccountId();
+		accountId = SirraSession.get().getAccountId();
 		failureMessage = "";
 	}
 	

@@ -5,7 +5,7 @@ import java.util.*;
 import org.hibernate.*;
 import org.hibernate.criterion.*;
 
-import com.ming.server.session.*;
+import com.sirra.server.session.*;
 import com.sirra.appcore.accounts.*;
 import com.sirra.appcore.users.*;
 
@@ -28,19 +28,19 @@ public class Finder {
 	}
 	
 	public BaseAccount getAccount() {
-		MingSession ms = MingSession.get();
-		if(ms.getAccountId() == null) {
+		SirraSession ss = SirraSession.get();
+		if(ss.getAccountId() == null) {
 			throw new RuntimeException("Finder requires accountId.");
 		}
-		return (BaseAccount) getSession().get(accountClass, Integer.parseInt(ms.getAccountId()));
+		return (BaseAccount) getSession().get(accountClass, Integer.parseInt(ss.getAccountId()));
 	}
 
 	public BaseUser getUser() {
-		MingSession ms = MingSession.get();
-		if(ms.getUserId() == null) {
+		SirraSession ss = SirraSession.get();
+		if(ss.getUserId() == null) {
 			throw new RuntimeException("FinderImpl requires userId.");
 		}
-		return (BaseUser) getSession().get(userClass, ms.getUserId());
+		return (BaseUser) getSession().get(userClass, ss.getUserId());
 	}
 
 	/**
@@ -75,7 +75,7 @@ public class Finder {
 	}
 	
 	protected Session getSession() {
-		MingSession ms = MingSession.get();
-		return ms.getHibernateSession();
+		SirraSession ss = SirraSession.get();
+		return ss.getHibernateSession();
 	}
 }

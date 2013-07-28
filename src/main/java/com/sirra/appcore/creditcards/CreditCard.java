@@ -4,7 +4,7 @@ import java.util.*;
 
 import javax.persistence.*;
 
-import com.ming.server.session.*;
+import com.sirra.server.session.*;
 import com.sirra.appcore.accounts.*;
 
 @Entity
@@ -26,7 +26,7 @@ public class CreditCard extends AccountEnabled {
 	
 	public CreditCard() {
 		creationDate = new Date();
-		accountId = MingSession.get().getAccountId();
+		accountId = SirraSession.get().getAccountId();
 	}
 
 	@Id

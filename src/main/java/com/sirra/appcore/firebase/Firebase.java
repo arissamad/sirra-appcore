@@ -1,7 +1,7 @@
 package com.sirra.appcore.firebase;
 
-import com.ming.server.json.*;
-import com.ming.server.session.*;
+import com.sirra.server.json.*;
+import com.sirra.server.session.*;
 import com.sirra.appcore.rest.*;
 import com.sirra.appcore.util.*;
 
@@ -38,9 +38,9 @@ public class Firebase {
 	 * @param path As simple as "messages".
 	 */
 	public void post(String path, Object payload) {
-		MingSession ms = MingSession.get();
+		SirraSession ss = SirraSession.get();
 		
-		JsonRestCaller caller = new JsonRestCaller("https://" + firebaseInstance + ".firebaseio.com/live/" + ms.getAccountId() + "/" + path + ".json");
+		JsonRestCaller caller = new JsonRestCaller("https://" + firebaseInstance + ".firebaseio.com/live/" + ss.getAccountId() + "/" + path + ".json");
 		caller.setPayload(JsonUtil.getInstance().convert(payload).toString());
 		try {
 			caller.executeCall();
