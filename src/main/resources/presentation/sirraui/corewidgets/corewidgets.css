@@ -1,0 +1,250 @@
+small {
+	font-size: 0.8em;
+	font-style: italic;
+}
+
+/* Styles */
+.header-style {
+	padding-top: 10px;
+	padding-bottom: 20px;
+	font-size: 3em;
+}
+
+.subheader-style {
+	padding-top: 10px;
+	padding-bottom: 10px;
+	font-size: 1.6em;
+}
+
+.alert {
+	color: red;
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+.inline-block {
+	display: inline-block;
+}
+
+/** PageHeaderWidget **/
+.PageHeaderWidget {
+	font-family: "Quicksand";
+	text-align: center;
+	font-size: 2.5em;
+	border-bottom: 1px solid #263545;
+	border-top: 1px solid #263545;
+	padding: 13px;
+	width: 300px;
+	margin: 0 auto;
+	margin-bottom: 30px;
+}
+
+/** TextWidget **/
+.TextWidget {
+	white-space: pre-wrap;
+	line-height: 1.2em;
+}
+
+.TextWidget.editable {
+	background: white;
+	border: 1px solid grey;
+	padding: 2px;
+}
+
+/** InputWidget **/
+.InputWidget {
+	border: 1px solid black;
+	border-radius: 2px;
+	cursor: text;
+	padding: 3px;
+}
+
+.InputWidget input {
+	width: 100%;
+}
+
+/** TextAreaWidget **/
+.TextAreaWidget {
+	border: 1px solid black;
+	border-radius: 2px;
+	cursor: text;
+	padding: 3px;
+}
+
+.TextAreaWidget textarea {
+	width: 100%;
+}
+
+/** ButtonWidget
+    Styles: thin 
+**/
+.ButtonWidget {
+	display: inline-block;
+	border-radius: 4px;
+	background: #263545;
+	color: #0000ff;
+	cursor: default;
+	font-family: "Roboto Slab";
+	font-weight: 300;
+}
+
+.ButtonWidget.active {
+	cursor: pointer;
+	color: white;
+}
+
+.ButtonWidget.active:hover {
+	background: #6DBCDB;
+}
+
+.ButtonWidget.inactive {
+	opacity: 0.5;
+}
+
+.ButtonWidget .text-section {
+	display: inline-block;
+	padding: 6px 14px 6px 14px;
+	vertical-align: top;
+}
+
+.ButtonWidget.thin .text-section {
+	padding: 2px 8px 2px 8px;
+}
+
+.ButtonWidget.inactive .right-section {
+	display: inline-block;
+	padding: 5px 3px 0px 0px;
+}
+
+.ButtonWidget.thin.inactive .right-section {
+	padding: 0px 3px;
+}
+
+.ButtonWidget.demoted {
+	color: grey;
+}
+
+/** LinkWidget **/
+.LinkWidget {
+	size: 0.8em;
+	display: inline-block;
+}
+
+.link {
+	text-decoration: underline;
+	cursor: pointer;
+	color: #75ADC6;
+}
+
+.link:hover {
+	color: red;
+}
+
+/**
+  TableWidget
+  Styles: v-align-middle 
+**/
+.TableWidget {
+	margin-bottom: 20px;
+}
+.TableWidget > table > thead > tr > th {
+	background: #000055;
+	color: white;
+	padding: 15px 15px 15px 5px;
+	text-align: left;
+	font-size: 1.2em;
+	border: 1px solid #bbbbff;
+	white-space: pre-wrap;
+}
+
+.TableWidget >table > tbody > tr > td {
+	background: #eee;
+	padding: 5px 5px 5px 5px;
+	border: 1px solid #ccc;
+}
+
+.TableWidget.v-align-middle >table > tbody > tr > td {
+	vertical-align: middle;
+}
+
+.TableWidget > table > tfoot > tr > td {
+	background: #ccc;
+	height: 10px;
+	border: 1px solid #ccc;
+}
+
+/** PanelWidget **/
+.PanelWidget .label {
+	padding-top: 7px;
+	padding-right: 8px;
+	white-space: pre-wrap;
+}
+
+.PanelWidget .value {
+	padding-bottom: 4px;
+}
+
+/** LineWidget (Line breaks) **/
+
+/** SpaceWidget **/
+.SpaceWidget {
+	display: inline-block;
+	height: 2px;
+}
+
+/** MenuWidget **/
+.MenuWidget {
+	font-family: "Quicksand";
+	font-weight: 400;
+	margin: 0px 0px 0px 0px;
+}
+
+.MenuWidget .menuItem {
+	display: inline-block;
+	cursor: pointer;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.menuWIdget .menuItem:hover {
+	background: #C4273C;
+}
+
+.MenuWidget .menuName {
+	display: inline-block;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	font-size: 1em;
+}
+
+.MenuWidget .menuItem.selected .menuName {
+	color: #263545;
+	font-weight: 700;
+}
+
+.MenuWidget .menuItem.selected  {
+	
+}
+
+.MenuWidget .menuItem .menuName:hover {
+	
+}
+
+/** LoadingWidget **/
+.LoadingWidget img {
+	width: 20px;
+	height: 20px;
+}
+
+.LoadingWidget .right.active {
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 8px;
+	margin-top: 3px;
+}
+
+/** DialogWidget **/
+.DialogWidget .dw-content {
+	padding-top: 10px;
+}

@@ -1,0 +1,15 @@
+.thumb {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	background: #ccc;
+	border-radius: 50%;
+	text-align: center;
+	margin-right: 5px;
+	float: left;
+}
+
+.thumb img {
+	width: 25px;
+	border-radius: 50%;
+}
