@@ -78,8 +78,16 @@ public class SqlParams {
 		return startIndex;
 	}
 	
+	public void setStartIndex(int startIndex) {
+		this.startIndex = startIndex;
+	}
+	
 	public int getNumItemsToRetrieve() {
 		return numItemsToRetrieve;
+	}
+	
+	public void setNumItemsToRetrieve(int numItemsToRetrieve) {
+		this.numItemsToRetrieve = numItemsToRetrieve;
 	}
 	
 	private class Sort {

@@ -1,3 +1,20 @@
+<div id="LoginWidget" class="LoginWidget">
+	<div class="header-text">Login</div>
+	<table class="login-table">
+	<tr>
+		<td class="label">Email</td><td class="value"><input class="username" type="text" /></td>
+	</tr>
+	<tr>
+		<td class="label">Password</td><td class="value"><input class="password" type="password" /></td>
+	</tr>
+	</table>
+	
+	<div class="login-button active">Login</div>
+	<div class="forgot-password">Forgot password? Click here</div>
+	
+	<div class="login-message"></div>
+</div>
+
 <div id="PageHeaderWidget" class="PageHeaderWidget">
 </div>
 
@@ -6,6 +23,10 @@
 
 <div id="InputWidget" class="InputWidget">
 	<input type="text" value=""></input>
+</div>
+
+<div id="PasswordWidget" class="PasswordWidget InputWidget">
+	<input type="password" value=""></input>
 </div>
 
 <div id="TextAreaWidget" class="TextAreaWidget">
@@ -25,6 +46,12 @@
 </div>
 
 <div id="TableWidget" class="TableWidget">
+	<div class="search-outer">
+		<div class="search-inner">
+			<input type="text"></input>
+			<div class="entypo-search search"></div>
+		</div>
+	</div>
 	<table>
 	<thead>
 		<tr>
@@ -33,7 +60,13 @@
 	</thead>
 	<tfoot>
 		<tr>
-			<td colspan="50"></td>
+			<td colspan="50">
+				<div class="pager">
+					<span class="mover left fontawesome-chevron-left"></span>
+					<span class="page-number">1</span>
+					<span class="mover right fontawesome-chevron-right"></span>
+				</div>
+			</td>
 		</tr>
 	</tfoot>
 	<tbody>

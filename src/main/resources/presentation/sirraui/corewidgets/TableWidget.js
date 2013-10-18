@@ -4,6 +4,8 @@ function TableWidget(context, settings) {
 	
 	this.context = context;
 	
+	this.table = this.widget.find("table");
+	
 	this.th = this.widget.find("th");
 	this.thParent = this.th.parent().empty();
 	
@@ -13,6 +15,7 @@ function TableWidget(context, settings) {
 	
 	this.columns = [];
 	this.selectors = [];
+	this.page = 0;
 }
 
 TableWidget.prototype.addSelectorColumn = function(action) {
@@ -92,10 +95,51 @@ TableWidget.prototype.renderList = function(list) {
 	}
 	
 	this.finish();
+	this.table.css("opacity", 1);
+};
+
+TableWidget.prototype.setSearchAction = function(searchAction) {
+	var input = this.widget.find(".search-outer input");
+	
+	this.widget.find(".search-outer").show();
+	this.widget.find(".search").click($IA(this, function() {
+		this.page = 0;
+		searchAction.call(input.val());
+	}));
+	input.keypress($IA(this, function(e) {
+		if(e.keyCode == 13) {
+			this.page = 0;
+			searchAction.call(input.val());
+		}
+	}));
+	
+	this.searchAction = searchAction;
+};
+
+TableWidget.prototype.setPaging = function() {
+	this.widget.find(".pager").show();
+	this.pageJq = this.widget.find(".page-number");
+	
+	this.widget.find(".mover.left").click($IA(this, function() {
+		this.page--;
+		if(this.page < 0) { this.page = 0; return; }
+		this.refresh();
+	}));
+	this.widget.find(".mover.right").click($IA(this, function() {
+		this.page++;
+		this.refresh();
+	}));
+};
+
+TableWidget.prototype.getPage = function() {
+	return this.page;
 };
 
 TableWidget.prototype.setLoader = function(loaderAction) {
-	this.loaderAction = loaderAction;
+	this.loaderAction = $A(this, function() {
+		this.table.css("opacity", 0.3);
+		loaderAction.call();
+	});
 };
 
 TableWidget.prototype.render = function() {
@@ -103,5 +147,6 @@ TableWidget.prototype.render = function() {
 };
 
 TableWidget.prototype.refresh = function() {
+	this.pageJq.setText("" + (this.page+1));
 	this.loaderAction.call();
 };

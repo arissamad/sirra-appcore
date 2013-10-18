@@ -73,6 +73,10 @@ public class BaseUser extends AccountEnabled {
 		this.password = encryptPassword(password);
 	}
 	
+	public boolean verifyPassword(String cleanTextPassword) {
+		return this.password.equals(encryptPassword(cleanTextPassword));
+	}
+	
 	public String getRoleMetaId() {
 		return roleMetaId;
 	}
@@ -94,7 +98,7 @@ public class BaseUser extends AccountEnabled {
 		this.forgotPasswordDate = forgotPasswordDate;
 	}
 	
-	public static String encryptPassword(String password) {
+	private static String encryptPassword(String password) {
 		return DigestUtils.shaHex(Salt.password(password));
 	}
 }

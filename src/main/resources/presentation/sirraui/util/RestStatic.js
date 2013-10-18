@@ -29,7 +29,15 @@ RestStatic.prototype.call = function(httpMethod, path, parameters, action) {
 		data.parameters = JSON.stringify(parameters);
 	} else {
 		for(var attr in parameters) {
-			data[attr] = JSON.stringify(parameters[attr]);
+			var value = parameters[attr];
+			
+			if(value != null && value._s_type != null) {
+				// Send SirraSerializable as complex json.
+				data[attr] = JSON.stringify(parameters[attr]);	
+			} else {
+				// Otherwise send as regular parameters.
+				data[attr] = parameters[attr];	
+			}
 		}
 	}
 	

@@ -1,10 +1,13 @@
-function DialogWidget(title) {
+function DialogWidget(title, settings) {
 	ClassUtil.mixin(DialogWidget, this, Widget);
-	Widget.call(this, "DialogWidget");
+	Widget.call(this, "DialogWidget", true, settings);
 	
-	this.widget.dialog({
-		title: title
-	});
+	if(settings == null) {
+		settings = {};
+	}
+	settings.title = title;
+	
+	this.widget.dialog(settings);
 	
 	current = this.widget.find(".dw-content");
 }

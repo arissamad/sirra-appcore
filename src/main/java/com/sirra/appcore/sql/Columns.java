@@ -47,7 +47,11 @@ public class Columns {
 		
 		if(classMetadata instanceof SingleTableEntityPersister) {
 			SingleTableEntityPersister persister = (SingleTableEntityPersister) classMetadata;
-			columns.add(persister.getDiscriminatorColumnName());
+			String dcn = persister.getDiscriminatorColumnName();
+			
+			if(dcn != null) {
+				columns.add(dcn);
+			}
 		}
 	}
 	
