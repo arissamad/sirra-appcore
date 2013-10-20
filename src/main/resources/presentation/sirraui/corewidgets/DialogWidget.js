@@ -6,6 +6,7 @@ function DialogWidget(title, settings) {
 		settings = {};
 	}
 	settings.title = title;
+	settings.modal = true;
 	
 	this.widget.dialog(settings);
 	

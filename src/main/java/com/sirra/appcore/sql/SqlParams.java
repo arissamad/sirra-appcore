@@ -15,6 +15,10 @@ public class SqlParams {
 	protected List<String> constraints;
 	protected Map<String, List<String>> orConstraints;
 	
+	// The following fields support the user searching by typing out a search term.
+	protected List<String> searchFields;
+	protected String searchTerm;
+	
 	protected List<Sort> sortColumns;
 	
 	public SqlParams() {
@@ -30,6 +34,13 @@ public class SqlParams {
 	public List<String> getAllConstraints() {
 		List<String> allConstraints = new ArrayList();
 		allConstraints.addAll(constraints);
+
+		if(requiresSearch()) {
+			orConstraints.remove("_search_term");
+			for(String fieldName: searchFields) {
+				addOrConstraint("_search_term", "LOWER(" + fieldName + ") LIKE '%" + searchTerm + "%'");
+			}
+		}
 		
 		for(List<String> orList: orConstraints.values()) {
 			if(orList.size() == 0) continue;
@@ -54,6 +65,31 @@ public class SqlParams {
 		if(!orConstraints.containsKey(groupName)) orConstraints.put(groupName, new ArrayList());
 		
 		orConstraints.get(groupName).add(constraint);
+	}
+	
+	private boolean requiresSearch() {
+		if(searchFields == null) return false;
+		else if(searchTerm == null) return false;
+		else if(searchTerm.equals("")) return false;
+		else if(searchFields.size() == 0) return false;
+		else return true;
+	}
+	
+	public List<String> getSearchFields() {
+		return searchFields;
+	}
+
+	public void setSearchFields(List<String> searchFields) {
+		this.searchFields = searchFields;
+	}
+
+	public void setSearchTerm(String searchTerm) {
+		this.searchTerm = searchTerm;
+		if(this.searchTerm != null) this.searchTerm = this.searchTerm.toLowerCase();
+	}
+	
+	public String getSearchTerm(String searchTerm) {
+		return searchTerm;
 	}
 	
 	public void setSort(String columnName, SqlOrder sqlOrder) {

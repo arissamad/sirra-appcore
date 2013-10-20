@@ -16,8 +16,8 @@ import com.sirra.appcore.users.*;
  */
 public class Finder {
 
-	protected static Class accountClass;
-	protected static Class userClass;
+	public static Class accountClass;
+	public static Class userClass;
 	
 	/**
 	 * Call this in your server bootstrap code.

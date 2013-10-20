@@ -31,24 +31,14 @@ RestStatic.prototype.call = function(httpMethod, path, parameters, action) {
 		for(var attr in parameters) {
 			var value = parameters[attr];
 			
-			if(value != null && value._s_type != null) {
-				// Send SirraSerializable as complex json.
-				data[attr] = JSON.stringify(parameters[attr]);	
+			var type = typeof(value);
+			
+			if(type == "string" || type == "number" || type == "boolean") {
+				data[attr] = parameters[attr];
 			} else {
-				// Otherwise send as regular parameters.
-				data[attr] = parameters[attr];	
+				data[attr] = JSON.stringify(parameters[attr]);	
 			}
 		}
-	}
-	
-	if(gv.accountId != null) {
-		log("Transmitting accountId");
-		data.accountId = gv.accountId;
-	}
-	
-	if(gv.userId != null) {
-		log("Transmitting userId");
-		data.userId = gv.userId;
 	}
 	
 	$.ajax({

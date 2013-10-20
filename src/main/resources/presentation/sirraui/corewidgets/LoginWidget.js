@@ -39,7 +39,6 @@ function LoginWidget() {
 			
 			if(loginInfo.isSuccessful) {
 				gv.user = loginInfo.user;
-				gv.userId = loginInfo.user.id;
 				
 				Storage.put("username", username.val());
 				Storage.putObject("loginInfo", loginInfo);
@@ -50,7 +49,7 @@ function LoginWidget() {
 				current = $(".menu-container");
 				
 				Rest.get("/api/menus", [], $A(this, function(menus) {
-					gv.menuWidget = new MenuWidget(menus);
+					new Page();
 				}));
 			} else {
 				loginMessage.text(loginInfo.error);

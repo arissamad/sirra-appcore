@@ -16,6 +16,7 @@ function TableWidget(context, settings) {
 	this.columns = [];
 	this.selectors = [];
 	this.page = 0;
+	this.searchTerm = null;
 }
 
 TableWidget.prototype.addSelectorColumn = function(action) {
@@ -116,7 +117,25 @@ TableWidget.prototype.setSearchAction = function(searchAction) {
 	this.searchAction = searchAction;
 };
 
-TableWidget.prototype.setPaging = function() {
+TableWidget.prototype.turnOnSearching = function() {
+	var input = this.widget.find(".search-outer input");
+	
+	this.widget.find(".search-outer").show();
+	this.widget.find(".search").click($IA(this, function() {
+		this.page = 0;
+		this.searchTerm = input.val();
+		this.refresh();
+	}));
+	input.keypress($IA(this, function(e) {
+		if(e.keyCode == 13) {
+			this.page = 0;
+			this.searchTerm = input.val();
+			this.refresh();
+		}
+	}));
+};
+
+TableWidget.prototype.turnOnPaging = function() {
 	this.widget.find(".pager").show();
 	this.pageJq = this.widget.find(".page-number");
 	
@@ -131,14 +150,13 @@ TableWidget.prototype.setPaging = function() {
 	}));
 };
 
-TableWidget.prototype.getPage = function() {
-	return this.page;
-};
-
 TableWidget.prototype.setLoader = function(loaderAction) {
 	this.loaderAction = $A(this, function() {
 		this.table.css("opacity", 0.3);
-		loaderAction.call();
+		var sqlParams = new Object();
+		sqlParams._page = this.page;
+		if(this.searchTerm != null) sqlParams._search = this.searchTerm;
+		loaderAction.call(sqlParams);
 	});
 };
 

@@ -32,6 +32,7 @@ public class SqlSearch {
 		if(sqlParams == null) {
 			sqlParams = new SqlParams();
 		}
+		
 		sql = construct(sql, sqlParams);
 		
 		SQLQuery query = SirraSession.get().getHibernateSession().createSQLQuery(sql);
@@ -102,11 +103,13 @@ public class SqlSearch {
 				tableStr = sql.substring(fromN, obN);
 			} else if(obN < 0 && wN >= 0) {
 				tableStr = sql.substring(fromN, wN);
-			}
-			else {
+			} else if(obN < 0 && wN < 0) {
+				tableStr = sql.substring(fromN);
+			} else {
 				int endN = wN<obN?wN:obN;
 				tableStr = sql.substring(fromN, endN);
 			}
+			
 			String[] tablePieces = tableStr.split(",");
 			SortedSet<String> tables = new TreeSet();
 			

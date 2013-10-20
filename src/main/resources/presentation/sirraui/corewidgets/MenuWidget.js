@@ -1,57 +1,61 @@
-function MenuWidget(menus, initialMenuMetaId) {
+function MenuWidget(menus) {
+	pushCurrent();
+	current = $(".menu-container");
+	
 	ClassUtil.mixin(MenuWidget, this, Widget);
 	Widget.call(this, "MenuWidget");
 
 	var menuItemMaster = this.widget.find(".menuItem");
-	var menuParent = menuItemMaster.parent();
+	this.menuParent = menuItemMaster.parent();
 	menuItemMaster.detach();
 	
-	this.menuLookup = {};
-	
-	var selectedMenu;
+	this.menuJqLookup = {};
+	this.firstMenuMetaId;
 	
 	for(var i=0; i<menus.length; i++) {
 		var menu = menus[i];
 		
-		var newMenu = menuItemMaster.clone();
-		this.menuLookup[menu.metaId] = newMenu;
+		var menuJq = menuItemMaster.clone();
+		menuJq.data("menu", menu);
 		
-		newMenu.find(".menuName").setText(menu.name);
-		menuParent.append(newMenu);
+		this.menuJqLookup[menu.metaId] = menuJq;
 		
-		if(initialMenuMetaId == menu.metaId) {
-			selectedMenu = newMenu;
-		}
+		menuJq.find(".menuName").setText(menu.name);
+		this.menuParent.append(menuJq);
 		
-		newMenu.click(function(menu, menuJq) {
-			return function() {
-				// History.pushState({}, "Sirra Voicemail - " + menu.name, "/app/" + menu.metaId);
-				menuParent.find(".menuItem").removeClass("selected");
-				menuJq.addClass("selected");
-				
-				current = $(".app-content");
-				current.empty();
-				
-				var channelClass = window[menu.jsClass];
-				if(channelClass == null) {
-					log("Unknown channel class: " + menu.jsClass);
-				}
-				
-				new channelClass();
-			};
-		}(menu, newMenu));
+		menuJq.click($IA(this, "select", menu.metaId));
 	}
 
 	if(menus.length > 1) {
-		if(selectedMenu == null) {
-			var firstMenu = menuParent.children().first();
-			firstMenu.click();
-		} else {
-			selectedMenu.click();
-		}
+		this.firstMenuMetaId = this.menuParent.children().first();
 	}
+	
+	popCurrent();
 };
 
 MenuWidget.prototype.select = function(metaId) {
-	this.menuLookup[metaId].click();
+	if(metaId == null) metaId = this.firstMenuMetaId;
+	
+	this.highlight(metaId);
+	this._renderPage(metaId);
 }
+
+MenuWidget.prototype.highlight = function(metaId) {
+	this.menuParent.find(".menuItem").removeClass("selected");
+	this.menuJqLookup[metaId].addClass("selected");
+};
+
+MenuWidget.prototype._renderPage = function(metaId) {
+	var menu = this.menuJqLookup[metaId].data("menu");
+	
+	History.pushState({}, menu.name, "/" + menu.metaId);
+	current = $(".app-content");
+	current.empty();
+	
+	var channelClass = window[menu.jsClass];
+	if(channelClass == null) {
+		log("Unknown channel class: " + menu.jsClass);
+	}
+	
+	new channelClass();
+};

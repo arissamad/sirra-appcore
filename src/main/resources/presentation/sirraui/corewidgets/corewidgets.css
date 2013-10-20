@@ -189,6 +189,7 @@ table.login-table .value input {
 
 .ButtonWidget.inactive {
 	opacity: 0.5;
+	vertical-align: bottom;
 }
 
 .ButtonWidget .text-section {
@@ -236,6 +237,7 @@ table.login-table .value input {
 **/
 .TableWidget {
 	margin-bottom: 20px;
+	display: inline-block;
 }
 
 .TableWidget .search-outer {
@@ -247,7 +249,7 @@ table.login-table .value input {
 
 .TableWidget .search-inner {
 	position: absolute;
-	right: 12px;
+	right: 0px;
 	width: 150px;
 	height: 20px;
 	top: -28px;
