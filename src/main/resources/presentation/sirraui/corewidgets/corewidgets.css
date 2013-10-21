@@ -141,16 +141,48 @@ table.login-table .value input {
 	padding: 2px;
 }
 
+/** HeaderWidget **/
+.HeaderWidget {
+	font-family: "Quattrocento Sans";
+	font-size: 2em;
+	color: #E40375;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #ddd;
+	margin-bottom: 30px;
+}
+
+/** LabelWidget **/
+.LabelWidget {
+	float: right;
+	color: #333;
+	font-family: "Quattrocento Sans";
+}
+
 /** InputWidget **/
 .InputWidget {
-	border: 1px solid black;
-	border-radius: 2px;
 	cursor: text;
-	padding: 3px;
 }
 
 .InputWidget input {
 	width: 100%;
+	color: #333;
+}
+
+.InputWidget input {
+  -webkit-transition: all 0.10s ease-in-out;
+  -moz-transition: all 0.10s ease-in-out;
+  -ms-transition: all 0.10s ease-in-out;
+  -o-transition: all 0.10s ease-in-out;
+  outline: none;
+  padding: 9px 3px 9px 5px;
+  margin: 0px 0px 0px 0px;
+  border: 1px solid #999;
+  border-radius: 4px;
+}
+ 
+.InputWidget input:focus {
+  box-shadow: 0px 0px 5px rgba(81, 203, 238, 1);
+  border: 1px solid rgba(81, 203, 238, 1);
 }
 
 /** TextAreaWidget **/
@@ -217,14 +249,21 @@ table.login-table .value input {
 
 /** LinkWidget **/
 .LinkWidget {
+	font-family: "open sans";
+	font-weight: 300;
 	size: 0.8em;
 	display: inline-block;
 }
 
+.LinkWidget.bold-link {
+	font-weight: 400;
+}
+
 .link {
-	text-decoration: underline;
+	/*text-decoration: underline;*/
 	cursor: pointer;
-	color: #75ADC6;
+	/** color: #75ADC6; old blue */
+	color: #2f98d9;
 }
 
 .link:hover {
@@ -238,6 +277,7 @@ table.login-table .value input {
 .TableWidget {
 	margin-bottom: 20px;
 	display: inline-block;
+	padding-right: 1px; /* 100% tables lose some right border without this */
 }
 
 .TableWidget .search-outer {
@@ -252,7 +292,7 @@ table.login-table .value input {
 	right: 0px;
 	width: 150px;
 	height: 20px;
-	top: -28px;
+	top: -45px;
 	border: 1px solid #ccc;
 	border-radius: 4px;
 	padding: 4px 1px 1px 3px;
@@ -276,20 +316,26 @@ table.login-table .value input {
 	clear: both;
 }
 
+.TableWidget > table > tbody > tr:hover > td {
+	background: #f5f5f5;
+}
+
 .TableWidget > table > thead > tr > th {
-	background: #000055;
-	color: white;
-	padding: 15px 15px 15px 5px;
+	background: #EFFAB4;
+	color: #E40375;
+	padding: 15px 15px 15px 10px;
 	text-align: left;
-	font-size: 1.2em;
-	border: 1px solid #bbbbff;
+	border: 1px solid #ccc;
 	white-space: pre-wrap;
+	font-family: "Open Sans";
+	font-weight: 300;
 }
 
 .TableWidget >table > tbody > tr > td {
-	background: #eee;
-	padding: 5px 5px 5px 5px;
+	background: white;
+	padding: 10px;
 	border: 1px solid #ccc;
+	color: #666;
 }
 
 .TableWidget.v-align-middle >table > tbody > tr > td {
@@ -297,17 +343,16 @@ table.login-table .value input {
 }
 
 .TableWidget > table > tfoot > tr > td {
-	background: #ccc;
+	background: white;
 	height: 10px;
-	border: 1px solid #ccc;
+	padding: 20px 0 20px 0;
+	float: left;
 }
 
 .TableWidget .pager {
 	display: none;
 	font-size: 0.8em;
 	width: 100px;
-	margin: 0 auto;
-	padding: 3px 0px;
 	color: #354E73;
 }
 
@@ -382,6 +427,12 @@ table.login-table .value input {
 }
 
 /** LoadingWidget **/
+.LoadingWidget.page-mode {
+	padding-top: 50px;
+	width: 50px;
+	margin: 0 auto;
+}
+
 .LoadingWidget img {
 	width: 20px;
 	height: 20px;
@@ -397,4 +448,13 @@ table.login-table .value input {
 /** DialogWidget **/
 .DialogWidget .dw-content {
 	padding-top: 10px;
+}
+
+/** FormWidget **/
+.FormWidget .left {
+	padding: 11px 14px 4px 0px;
+}
+
+.FormWidget .right {
+	padding-bottom: 6px;
 }

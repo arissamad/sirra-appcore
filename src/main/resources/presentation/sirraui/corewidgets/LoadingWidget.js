@@ -14,5 +14,9 @@ function LoadingWidget(settings) {
 		right.addClass("active");
 	}
 	
+	if(this.settings.get("pageMode") == true) {
+		this.widget.addClass("page-mode");
+	}
+	
 	current.append(this.widget);
 }

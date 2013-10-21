@@ -314,6 +314,11 @@ public class ApiServlet extends HttpServlet {
 			}
 		}
 		
+		// tricky: If string, to be technically json it needs to be wrapped in quotes
+		if(json instanceof String) {
+			return "\"" + json + "\"";
+		}
+		
 		return json.toString();
 	}
     

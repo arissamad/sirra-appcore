@@ -27,7 +27,7 @@ function MenuWidget(menus) {
 	}
 
 	if(menus.length > 1) {
-		this.firstMenuMetaId = this.menuParent.children().first();
+		this.firstMenuMetaId = menus[0].metaId;
 	}
 	
 	popCurrent();

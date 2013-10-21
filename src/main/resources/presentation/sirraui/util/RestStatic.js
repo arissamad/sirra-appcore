@@ -18,7 +18,7 @@ RestStatic.prototype.put = function(path, parameters, action) {
 	this.call("PUT", path, parameters, action);
 };
 
-RestStatic.prototype.delete = function(path, parameters, action) {
+RestStatic.prototype.del = function(path, parameters, action) {
 	this.call("DELETE", path, parameters, action);
 };
 
@@ -30,6 +30,9 @@ RestStatic.prototype.call = function(httpMethod, path, parameters, action) {
 	} else {
 		for(var attr in parameters) {
 			var value = parameters[attr];
+			
+			// Simply don't include null parameters
+			if(value == null) continue;
 			
 			var type = typeof(value);
 			

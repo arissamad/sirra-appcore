@@ -5,3 +5,5 @@ function SpaceWidget(numBlocks) {
 	if(numBlocks == null) numBlocks = 1;
 	this.widget.css("width", numBlocks * 10);
 }
+
+var SW = SpaceWidget;

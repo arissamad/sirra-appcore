@@ -5,7 +5,6 @@ import java.util.*;
 
 import org.json.*;
 import org.json.simple.JSONValue;
-import org.json.simple.parser.*;
 import org.reflections.*;
 
 import com.sirra.server.rest.*;
@@ -110,6 +109,10 @@ public class JsonUtil {
 			} catch(IllegalAccessException e) {
 				throw new RuntimeException(e);
 			}
+		}
+		
+		if(SirraSerializable.class.isInstance(obj)) {
+			json.put("_s_type", obj.getClass().getSimpleName());
 		}
 		
 		return json;

@@ -6,6 +6,10 @@ function TableWidget(context, settings) {
 	
 	this.table = this.widget.find("table");
 	
+	if(this.settings.has("css")) {
+		this.table.css(this.settings.get("css"));
+	}
+	
 	this.th = this.widget.find("th");
 	this.thParent = this.th.parent().empty();
 	
@@ -74,29 +78,33 @@ TableWidget.prototype.renderList = function(list) {
 	this.list = list;
 	for(var i=0; i<list.length; i++) {
 		var item = list[i];
-		
-		var newTr = this.tr.clone();
-		this.tbody.append(newTr);
-		
-		for(var j=0; j<this.columns.length; j++) {
-			var col = this.columns[j];
-			var newTd = this.td.clone();
-			
-			if(col.settings != null && col.settings.has("css")) {
-				newTd.css(col.settings.get("css"));
-			}
-			newTr.append(newTd);
-			
-			current = newTd;
-			for(var k=0; k<col.length; k++) {
-				if(isFunction(col[k])) col[k].call(this.context, item);
-				else new TextWidget(item[col[k]]);
-			}
-		}
+		this.tbody.append(this._createRow(item));
 	}
 	
 	this.finish();
 	this.table.css("opacity", 1);
+};
+
+TableWidget.prototype._createRow = function(item) {
+	var newTr = this.tr.clone();
+	
+	for(var j=0; j<this.columns.length; j++) {
+		var col = this.columns[j];
+		var newTd = this.td.clone();
+		
+		if(col.settings != null && col.settings.has("css")) {
+			newTd.css(col.settings.get("css"));
+		}
+		newTr.append(newTd);
+		
+		current = newTd;
+		for(var k=0; k<col.length; k++) {
+			if(isFunction(col[k])) col[k].call(this.context, item);
+			else new TextWidget(item[col[k]]);
+		}
+	}
+	
+	return newTr;
 };
 
 TableWidget.prototype.setSearchAction = function(searchAction) {
@@ -160,6 +168,45 @@ TableWidget.prototype.setLoader = function(loaderAction) {
 	});
 };
 
+TableWidget.prototype.setLoaderResource = function(resourcePath, apiParameters) {
+	
+	this.loaderAction = $A(this, function() {
+		this.table.css("opacity", 0.3);
+
+		var parameters = {};
+		
+		for(var attr in apiParameters) {
+			parameters[attr] = apiParameters[attr];
+		}
+		
+		parameters._page = this.page;
+		if(this.searchTerm != null) {
+			parameters._search = this.searchTerm;
+		} else {
+			delete parameters._search;
+		}
+		
+		Rest.get(resourcePath, parameters, $A(this, function(list) {
+			this.renderList(list);
+		}));
+	});
+	
+	this.singleLoaderAction = $A(this, function(id, tr) {
+		var parameters = {};
+		
+		for(var attr in apiParameters) {
+			parameters[attr] = apiParameters[attr];
+		}
+		
+		tr.css("opacity", 0.3);
+		Rest.get(resourcePath + "/" + id, parameters, $A(this, function(item) {
+			var newTr = this._createRow(item);
+			tr.after(newTr);
+			tr.remove();
+		}));
+	});
+};
+
 TableWidget.prototype.render = function() {
 	this.loaderAction.call();
 };
@@ -167,4 +214,8 @@ TableWidget.prototype.render = function() {
 TableWidget.prototype.refresh = function() {
 	this.pageJq.setText("" + (this.page+1));
 	this.loaderAction.call();
+};
+
+TableWidget.prototype.refreshRow = function(id, td) {
+	this.singleLoaderAction.call(id, td.parent());
 };
