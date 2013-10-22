@@ -2,6 +2,9 @@ function DateUtilStatic() {
 	
 }
 
+/**
+ * Returns a friendly date string.
+ */
 DateUtilStatic.prototype.toDate = function(inDate) {
 	if(inDate instanceof Date) {
 		return moment(inDate).format('L');	
@@ -21,7 +24,7 @@ DateUtilStatic.prototype.toTime = function(inDate) {
 };
 
 DateUtilStatic.prototype.toDateAndTime = function(inDate) {
-	return this.toString(inDate) + " " + this.toTime(inDate);
+	return this.toDate(inDate) + " " + this.toTime(inDate);
 };
 
 var DateUtil = new DateUtilStatic();

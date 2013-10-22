@@ -24,7 +24,8 @@ public class PlainDate {
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		
 		if(timezone != null) {
-			sdf.setTimeZone(TimeZone.getTimeZone(timezone));
+			TimeZone timeZone = TimeZone.getTimeZone(timezone);
+			sdf.setTimeZone(timeZone);
 		}
 		
 		return sdf.format(date);
