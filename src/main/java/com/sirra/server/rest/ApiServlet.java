@@ -21,10 +21,12 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 
+import org.eclipse.jetty.http.*;
 import org.json.*;
 import org.reflections.Reflections;
 
 import com.sirra.appcore.users.*;
+import com.sirra.appcore.util.*;
 import com.sirra.server.json.JsonUtil;
 import com.sirra.server.rest.annotations.*;
 import com.sirra.server.session.SirraSession;
@@ -165,7 +167,16 @@ public class ApiServlet extends HttpServlet {
     		response.getWriter().write(responseStr);
     		return;
     	} catch(Exception e) {
-    		throw new RuntimeException(e);
+    		System.err.println(StackTrace.get(e));
+    		response.setStatus(HttpStatus.INTERNAL_SERVER_ERROR_500);
+    		
+    		Map map = new HashMap();
+    		map.put("errorCode", 400);
+    		map.put("errorMessage", "An unexpected server has occured.");
+    		
+    		JSONObject json = (JSONObject) JsonUtil.getInstance().convert(map);
+    		
+    		response.getWriter().write(json.toString());
     	} finally {
     		SirraSession.end();
     		System.out.println("--------- API Call END: " + httpMethod.name() + " " + apiPath +" ---------");

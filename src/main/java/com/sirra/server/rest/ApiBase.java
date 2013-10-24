@@ -123,4 +123,24 @@ public class ApiBase extends HttpServlet
 		
 		return sqlParams;
 	}
+	
+	private List<String> attributes;
+	protected List<String> getAttributes() {
+		if(attributes == null) {
+			attributes = new ArrayList();
+		
+			String fieldStr = SirraSession.get().getRequest().getParameter("fields");
+			if(fieldStr != null && fieldStr.length() > 0) {
+				String[] fields = fieldStr.split(",");
+				for(String field: fields) {
+					field = field.trim();
+					if(field.length() > 0) {
+						attributes.add(field);
+					}
+				}
+			}
+		}
+		
+		return attributes;
+	}
 }

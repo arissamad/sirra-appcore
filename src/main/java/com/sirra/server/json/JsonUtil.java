@@ -3,10 +3,13 @@ package com.sirra.server.json;
 import java.lang.reflect.*;
 import java.util.*;
 
+import javax.persistence.*;
+
 import org.json.*;
 import org.json.simple.JSONValue;
 import org.reflections.*;
 
+import com.sirra.appcore.util.*;
 import com.sirra.server.rest.*;
 
 public class JsonUtil {
@@ -86,7 +89,13 @@ public class JsonUtil {
 	    	while(true) {
 				Field[] declaredFields = currClass.getDeclaredFields();
 				
-				fields.addAll(Arrays.asList(declaredFields));
+				for(Field field: declaredFields) {
+					if(field.getAnnotation(Hidden.class) != null) {
+						continue;
+					}
+					fields.add(field);
+				}
+
 				currClass = currClass.getSuperclass();
 				if(currClass.getName().equals("java.lang.Object"))
 				{
@@ -108,6 +117,15 @@ public class JsonUtil {
 				json.put(field.getName(), _convertToJson(value, level+1));
 			} catch(IllegalAccessException e) {
 				throw new RuntimeException(e);
+			}
+		}
+		
+		if(obj instanceof EntityBase) {
+			EntityBase entityBase = (EntityBase) obj;
+			Map<String, Object> additionalParameters = entityBase.getAdditionalParameters();
+			
+			for(String key: additionalParameters.keySet()) {
+				json.put(key, _convertToJson(additionalParameters.get(key), level+1));
 			}
 		}
 		

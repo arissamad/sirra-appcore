@@ -36,7 +36,7 @@ public class Setter {
 				}
 			}
 		} catch(Exception e) {
-			throw new RuntimeException(e);
+			throw new RuntimeException("Could not set attribute " + attributeName + " with value " + value + " on object " + obj, e);
 		}
 		
 		try {

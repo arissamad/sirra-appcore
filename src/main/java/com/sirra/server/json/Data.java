@@ -9,6 +9,10 @@ import java.util.*;
  */
 public class Data extends HashMap<String, Object> {
 	
+	public Data() {
+		
+	}
+	
 	public String getString(String key) {
 		return (String) get(key);
 	}
@@ -18,6 +22,11 @@ public class Data extends HashMap<String, Object> {
 	}
 	
 	public double getDouble(String key) {
+		return (Double) get(key);
+	}
+
+	public double getDouble(String key, double defaultValue) {
+		if(get(key) == null) return defaultValue;
 		return (Double) get(key);
 	}
 	

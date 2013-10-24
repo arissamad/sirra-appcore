@@ -133,6 +133,7 @@ table.login-table .value input {
 .TextWidget {
 	white-space: pre-wrap;
 	line-height: 1.2em;
+	display: inline;
 }
 
 .TextWidget.editable {
