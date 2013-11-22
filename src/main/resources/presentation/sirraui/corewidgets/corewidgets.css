@@ -132,7 +132,6 @@ table.login-table .value input {
 /** TextWidget **/
 .TextWidget {
 	white-space: pre-wrap;
-	line-height: 1.2em;
 	display: inline;
 }
 
@@ -164,12 +163,12 @@ table.login-table .value input {
 	cursor: text;
 }
 
-.InputWidget input {
+.InputWidget input, .TextAreaWidget textarea {
 	width: 100%;
 	color: #333;
 }
 
-.InputWidget input {
+.InputWidget input, .TextAreaWidget textarea {
   -webkit-transition: all 0.10s ease-in-out;
   -moz-transition: all 0.10s ease-in-out;
   -ms-transition: all 0.10s ease-in-out;
@@ -181,21 +180,17 @@ table.login-table .value input {
   border-radius: 4px;
 }
  
-.InputWidget input:focus {
+.InputWidget input:focus, .TextAreaWidget textarea:focus {
   box-shadow: 0px 0px 5px rgba(81, 203, 238, 1);
   border: 1px solid rgba(81, 203, 238, 1);
 }
 
 /** TextAreaWidget **/
 .TextAreaWidget {
-	border: 1px solid black;
+/*	border: 1px solid black;
 	border-radius: 2px;
 	cursor: text;
-	padding: 3px;
-}
-
-.TextAreaWidget textarea {
-	width: 100%;
+	padding: 3px;*/
 }
 
 /** ButtonWidget
