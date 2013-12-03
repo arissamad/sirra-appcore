@@ -5,6 +5,8 @@ import java.io.*;
 
 import javax.servlet.*;
 
+import com.sirra.server.rest.*;
+
 import java.rmi.RemoteException;
 
 /**
@@ -128,7 +130,7 @@ public class ExceptionUtil
             String tab;
             
             // $ is for tapestry built classes.
-            if(className.indexOf("com.sirra") == 0 && 
+            if((className.indexOf("com.sirra") == 0 || className.indexOf(ApiServlet.getAPIPackageBase()) == 0) && 
             		className.indexOf("$") < 0 && 
             		methodName.indexOf("$") < 0 &&
             		methodName.indexOf("dispatchComponentEvent") < 0)

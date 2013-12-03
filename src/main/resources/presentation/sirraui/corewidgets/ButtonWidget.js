@@ -1,6 +1,6 @@
-function ButtonWidget(text, action) {
+function ButtonWidget(text, action, settings) {
 	ClassUtil.mixin(ButtonWidget, this, Widget);
-	Widget.call(this, "ButtonWidget");
+	Widget.call(this, "ButtonWidget", true, settings);
 	
 	this.widget.disableTextSelect();
 	if(!text != null) this.setValue(text);

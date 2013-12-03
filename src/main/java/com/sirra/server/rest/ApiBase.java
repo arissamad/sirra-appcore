@@ -66,6 +66,11 @@ public class ApiBase extends HttpServlet
 		return (T) ms.getHibernateSession().get(clazz, id);
 	}
 	
+	protected <T extends Object> T get(Class<T> clazz, Integer id) {
+		SirraSession ms = SirraSession.get();
+		return (T) ms.getHibernateSession().get(clazz, id);
+	}
+	
 	protected void delete(Object object) {
 		SirraSession ms = SirraSession.get();
 		ms.getHibernateSession().delete(object);

@@ -1,5 +1,6 @@
 package com.sirra.server.json;
 
+import java.math.*;
 import java.util.*;
 
 /**
@@ -19,6 +20,16 @@ public class Data extends HashMap<String, Object> {
 	
 	public int getInt(String key) {
 		return (Integer) get(key);
+	}
+	
+	public int getInt(String key, int valueIfEmpty) {
+		Object obj = get(key);
+		
+		if(obj == null) return valueIfEmpty;
+		
+		if(obj instanceof BigInteger) {
+			return ((BigInteger)obj).intValue();
+		} else return (Integer) obj;
 	}
 	
 	public double getDouble(String key) {

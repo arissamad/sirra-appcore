@@ -25,12 +25,13 @@ public class Config {
 		System.out.println("Use this program to create encrypted strings of passwords, api keys, etc.");
 		System.out.println("This program assumes you already have generated your secret key. If not, run in sirra-appcore: com.sirra.appcore.util.config.GenerateSecretKey.\n");
 		
-		System.out.print("Enter string to secure:");
 		Scanner in = new Scanner(System.in);
-		String value = in.next();
-		
+
 		System.out.print("Enter config key (this is the secret key you store in the environment variable CONFIG_KEY): ");
 		String configKey = in.next();
+		
+		System.out.print("Enter string to secure:");
+		String value = in.next();
 		
 		try {
 			Config config = new Config(configKey);

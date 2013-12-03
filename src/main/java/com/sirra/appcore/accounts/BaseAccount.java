@@ -4,6 +4,8 @@ import java.util.*;
 
 import javax.persistence.*;
 
+import org.hibernate.annotations.*;
+
 /**
  * Each Sirra App will have an Account entity, which should extend this class.
  * 
@@ -48,8 +50,16 @@ public abstract class BaseAccount {
 		this.id = Integer.parseInt(id);
 	}
 	
+	/**
+	 * You can manually set your own ID if needed. Don't use 0 - that is not a valid ID. Negative numbers are okay.
+	 * 
+	 * @return
+	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SequenceIfNotBlank")
+	@GenericGenerator(name="SequenceIfNotBlank",
+	                  strategy="com.sirra.server.persistence.SequenceGeneratorIfNotBlank"
+	)
     public int getId() {
 		return id;
 	}

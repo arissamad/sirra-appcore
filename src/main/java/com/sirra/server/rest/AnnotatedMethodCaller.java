@@ -36,7 +36,8 @@ public class AnnotatedMethodCaller {
 		
 		boolean firstParameterIsId = false;
 		
-		if(apiBase.getPathParameters().size() == 1) {
+		int numPathParameters = apiBase.getPathParameters().size();
+		if(numPathParameters == 1) {
 			firstParameterIsId = true;
 		}
 		
@@ -46,6 +47,21 @@ public class AnnotatedMethodCaller {
 		Iterator<Method> methodIt = methods.iterator();
 		while(methodIt.hasNext()) {
 			Method method = methodIt.next();
+			
+			if(numPathParameters > 1 && method.isAnnotationPresent(PathParameters.class)) {
+				PathParameters pathParametersAnnotation = method.getAnnotation(PathParameters.class);
+				if(pathParametersAnnotation.value().length == numPathParameters) {
+					// This one wins
+					methods = new HashSet();
+					methods.add(method);
+					break;
+				}
+			}
+			
+			if(numPathParameters <= 1 && method.isAnnotationPresent(PathParameters.class)) {
+				methodIt.remove();
+				continue;
+			}
 			
 			if(firstParameterIsId && !method.isAnnotationPresent(BY_ID.class)) {
 				methodIt.remove();
@@ -82,19 +98,34 @@ public class AnnotatedMethodCaller {
 		}
 		
 		// Method 2 of specifying method parameters: As query parameters (or, in the case of jQuery, as the data object).
-		Parameters variableAnnotation = method.getAnnotation(Parameters.class);
+		PathParameters pathParametersAnnotation = method.getAnnotation(PathParameters.class);
+		Map<String, String> pathLookup = new HashMap();
+		if(pathParametersAnnotation != null) {
+			List<String> pathValues = apiBase.getPathParameters();
+			
+			String[] pathNames = pathParametersAnnotation.value();
+			for(int i=0; i<pathNames.length; i++) {
+				pathLookup.put(pathNames[i], pathValues.get(i));
+			}
+		}
+				
+		Parameters parametersAnnotation = method.getAnnotation(Parameters.class);
 		Class[] parameterTypes = method.getParameterTypes();
-		if(variableAnnotation != null) {
+		if(parametersAnnotation != null) {
 			
 			List<Object> values = new ArrayList();
 			
-			String[] parameterMapping = variableAnnotation.value();
+			String[] parameterMapping = parametersAnnotation.value();
 			
 			for(int i=0; i<parameterMapping.length; i++) {
 				String parameterName = parameterMapping[i];
 				
 				// If value was not passed in via REST call, it will be null.
 				String value = apiBase.getParameter(parameterName);
+				
+				if(value == null) {
+					value = pathLookup.get(parameterName);
+				}
 				
 				// Special case for first parameter when it is GET_BY_ID
 				if(i == 0 && firstParameterIsId) {

@@ -3,7 +3,7 @@ function DateUtilStatic() {
 }
 
 /**
- * Returns a friendly date string.
+ * Returns a friendly date string. Can handle Date, plain-date string, and ms.
  */
 DateUtilStatic.prototype.toDate = function(inDate) {
 	if(inDate instanceof Date) {
@@ -25,6 +25,10 @@ DateUtilStatic.prototype.toTime = function(inDate) {
 
 DateUtilStatic.prototype.toDateAndTime = function(inDate) {
 	return this.toDate(inDate) + " " + this.toTime(inDate);
+};
+
+DateUtilStatic.prototype.toPlainDate = function(inDate) {
+	return moment(inDate).format("YYYY-MM-DD");
 };
 
 var DateUtil = new DateUtilStatic();

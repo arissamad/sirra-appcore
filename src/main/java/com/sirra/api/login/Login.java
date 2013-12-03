@@ -39,7 +39,7 @@ public class Login extends ApiBase {
 		return map;
 	}
 	
-	public void addSessionCookie(String name, String value) {
+	public static void addSessionCookie(String name, String value) {
 		Cookie cookie = new Cookie(name, value);
 		cookie.setPath("/");
 		SirraSession.get().getResponse().addCookie(cookie);

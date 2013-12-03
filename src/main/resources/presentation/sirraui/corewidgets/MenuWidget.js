@@ -42,6 +42,11 @@ MenuWidget.prototype.select = function(metaId) {
 
 MenuWidget.prototype.highlight = function(metaId) {
 	this.menuParent.find(".menuItem").removeClass("selected");
+	
+	if(this.menuJqLookup[metaId] == null) {
+		log("Menu with metaId \"" + metaId + "\" not found. Is the user retrieving the right list of menus?");
+		return;
+	}
 	this.menuJqLookup[metaId].addClass("selected");
 };
 

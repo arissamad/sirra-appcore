@@ -5,6 +5,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import org.apache.commons.codec.digest.*;
+import org.hibernate.annotations.*;
 
 import com.sirra.appcore.accounts.*;
 import com.sirra.appcore.util.*;
@@ -30,9 +31,16 @@ public class BaseUser extends AccountEnabled {
 	public BaseUser() { }
 	public BaseUser(String id) { this.id = id; }
 	
+	/**
+	 * You can manually set your own ID if desired.
+	 * 
+	 * @return
+	 */
 	@Id
-	@GeneratedValue(generator = "uuid")
-	@org.hibernate.annotations.GenericGenerator(name = "uuid", strategy = "uuid")
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="UuidIfNotBlank")
+	@GenericGenerator(name="UuidIfNotBlank",
+	                  strategy="com.sirra.server.persistence.UuidGeneratorIfNotBlank"
+	)
     public String getId() {
 		return id;
 	}
