@@ -42,9 +42,20 @@ public class ApiBase extends HttpServlet
 		return result;
 	}
 	
-	public Map<String, Object> success() {
+	/**
+	 * @param keyValuePairs Something like "sum", 5, "name", "Aris"
+	 * @return
+	 */
+	public Map<String, Object> success(Object... keyValuePairs) {
 		Map<String, Object> result = new HashMap();
 		result.put("isSuccessful", true);
+		
+		for(int i=0; i<keyValuePairs.length; i+=2) {
+			String key = (String) keyValuePairs[i];
+			Object value = keyValuePairs[i+1];
+			
+			result.put(key, value);
+		}
 		
 		return result;
 	}

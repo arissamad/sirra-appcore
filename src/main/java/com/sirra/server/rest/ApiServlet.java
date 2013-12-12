@@ -124,12 +124,15 @@ public class ApiServlet extends HttpServlet {
     	while(parameterIterator.hasNext()) {
     		String key = parameterIterator.next();
     		parameterDebug.append(key + ": ");
-    		parameterDebug.append(parameterMap.get(key));
+    		
+    		String value = parameterMap.get(key);
+    		if(value != null && value.length() > 50) value = value.substring(0, 49) + " (TRUNCATED)";
+    		parameterDebug.append(value);
     		
     		if(parameterIterator.hasNext()) parameterDebug.append(", ");
     	}
     	
-    	System.out.println("\n--------- API Call Begin: " + httpMethod.name() + " " + apiPath + " - Parameters: [" + parameterDebug.toString() + "] --------- ");
+    	System.out.println("\n--------- API Call Begin: " + request.getScheme() + " " + httpMethod.name() + " " + apiPath + " - Parameters: [" + parameterDebug.toString() + "] --------- ");
     	SirraSession.start(request, response);
 
     	UserSession userSession = UserSession.getCurrentSession();
