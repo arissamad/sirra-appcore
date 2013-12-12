@@ -97,11 +97,6 @@ public class ApiServlet extends HttpServlet {
     	String apiPath = request.getPathInfo();
     	HttpType httpMethod = HttpType.valueOf(request.getMethod());
     	
-    	Map<String, String[]> mm =  request.getParameterMap();
-    	for (Entry<String, String[]> e : mm.entrySet()) {
-    	    System.out.println(" --- " + e.getKey());
-    	}
-    	
     	Object o = request.getParameter("cards");
     	
     	String parameterString = request.getParameter("parameters");
@@ -268,7 +263,6 @@ public class ApiServlet extends HttpServlet {
     	Map<String, String[]> requestMap = request.getParameterMap();
     	Map<String, String> parameterMap = new TreeMap();
     	
-    	System.out.println("Parameters:");
     	for(String key: requestMap.keySet()) {
     		String[] values = requestMap.get(key);
     		String value = null;
