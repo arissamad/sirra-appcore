@@ -304,7 +304,7 @@ table.login-table .value input {
 .TableWidget .search-inner .search {
 	float: right;
 	color: #888;
-	padding:2px 5px;
+	padding:0px 5px;
 	cursor: pointer;
 }
 
