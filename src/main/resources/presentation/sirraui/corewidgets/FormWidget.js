@@ -54,6 +54,14 @@ FormWidget.prototype.setValues = function(valueObject) {
 			
 			if(value != null) {
 				var currValue = this.links[metaId].getValue();
+				
+				// For widgets that support _hasSetValue:
+				if(this.links[metaId]._hasSetValue != null && this.links[metaId]._hasSetValue() == false) {
+					this.links[metaId].setValue(value);
+					continue;
+				}
+				
+				// For normal widgets:
 				if(currValue == null || currValue == "") {
 					this.links[metaId].setValue(value);
 				}

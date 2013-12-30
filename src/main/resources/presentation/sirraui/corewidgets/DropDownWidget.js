@@ -32,6 +32,14 @@ DropDownWidget.prototype.appendList = function(list, idAttribute, valueAttribute
 DropDownWidget.prototype.setValue = function(id) {
 	var option = this.select.find("[id='" + id + "']");
 	if(option != null) option.attr("selected", true);
+	
+	this.hasSetValue = true;
+};
+
+// Exclusiely for FormWidget.setValues
+DropDownWidget.prototype._hasSetValue = function() {
+	if(this.hasSetValue == true) return true;
+	else return false;
 };
 
 DropDownWidget.prototype.getValue = function() {
