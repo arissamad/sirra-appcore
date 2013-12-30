@@ -6,6 +6,8 @@ import javax.persistence.*;
 
 import org.hibernate.annotations.*;
 
+import com.sirra.appcore.util.*;
+
 /**
  * Each Sirra App will have an Account entity, which should extend this class.
  * 
@@ -14,7 +16,7 @@ import org.hibernate.annotations.*;
  * @author aris
  */
 @MappedSuperclass
-public abstract class BaseAccount {
+public abstract class BaseAccount extends EntityBase {
 
 	protected int id;
 	

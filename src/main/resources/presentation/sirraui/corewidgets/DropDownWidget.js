@@ -1,4 +1,4 @@
-function DropDownWidget(settings, list, idAttribute, valueAttribute, initialId) {
+function DropDownWidget(list, idAttribute, valueAttribute, initialId, settings) {
 	ClassUtil.mixin(DropDownWidget, this, Widget);
 	Widget.call(this, "DropDownWidget", true, settings);
 	

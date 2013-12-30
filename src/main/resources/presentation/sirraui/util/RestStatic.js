@@ -38,6 +38,8 @@ RestStatic.prototype.call = function(httpMethod, path, parameters, action) {
 			
 			if(type == "string" || type == "number" || type == "boolean") {
 				data[attr] = parameters[attr];
+			} else if(value instanceof Date) {
+				data[attr] = value.getTime();
 			} else {
 				data[attr] = JSON.stringify(parameters[attr]);	
 			}

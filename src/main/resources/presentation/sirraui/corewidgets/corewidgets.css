@@ -568,3 +568,7 @@ table.login-table .value input {
 .EasySelectorWidget .frame-bottom:hover {
 	color: red;
 }
+
+.ThumbWidget {
+	margin-right: 20px !important;
+}

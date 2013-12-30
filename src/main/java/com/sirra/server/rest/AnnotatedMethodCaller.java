@@ -169,6 +169,14 @@ public class AnnotatedMethodCaller {
 				else if(parameterType.equals(Boolean.class)) {
 					values.add(Boolean.parseBoolean(value));
 				}
+				else if(parameterType.equals(Date.class)) {
+					if(value == null) values.add(null);
+					else {
+						Long l = Long.parseLong(value);
+						Date date = new Date(l);
+						values.add(date);
+					}
+				}
 				else {
 					// Assume complex JSON
 					Object obj = JsonUtil.getInstance().parse(value);

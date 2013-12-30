@@ -209,9 +209,7 @@ public class ApiServlet extends HttpServlet {
     	throw new RuntimeException("Cannot find API Class in " + packageBase + ": " + pathList);
     }
     
-    protected Class<? extends ApiBase> getCorrespondingClass(String restPath) {
-    	
-    	// Currently this does not allow for dynamic updates of REST classes in development mode.
+    public static void prepareClasses() {
     	if(lookup == null) {
     		lookup = new HashMap();
     		
@@ -254,7 +252,9 @@ public class ApiServlet extends HttpServlet {
 	    		lookup.put(path.toString(), apiClass);
 	    	}
     	}
-
+    }
+    
+    protected Class<? extends ApiBase> getCorrespondingClass(String restPath) {
     	return lookup.get(restPath);
     }
     

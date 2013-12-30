@@ -53,7 +53,10 @@ FormWidget.prototype.setValues = function(valueObject) {
 			var value = valueObject[metaId];
 			
 			if(value != null) {
-				this.links[metaId].setValue(value);
+				var currValue = this.links[metaId].getValue();
+				if(currValue == null || currValue == "") {
+					this.links[metaId].setValue(value);
+				}
 			}
 		}
 	}
@@ -64,6 +67,7 @@ FormWidget.prototype.link = function(metaId, inputWidget) {
 };
 
 FormWidget.prototype.getValue = function(metaId) {
+	if(this.links[metaId] == null) return null;
 	return this.links[metaId].getValue();
 };
 
