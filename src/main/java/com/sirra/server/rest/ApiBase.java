@@ -32,6 +32,8 @@ public class ApiBase extends HttpServlet
 	
 	protected ApiBase() {
 		// Do nothing special during instantiation
+		parameters = new HashMap();
+		pathParameters = new ArrayList();
 	}
 	
 	protected Map<String, Object> fail(String message) {
@@ -109,6 +111,13 @@ public class ApiBase extends HttpServlet
 	}
 	
 	private SqlParams sqlParams;
+	
+	/**
+	 * Use this when calling the API from java level.
+	 */
+	public void setSqlParams(SqlParams sqlParams) {
+		this.sqlParams = sqlParams;
+	}
 	
 	/**
 	 * searchFields ties into the built-in "_search" search term. It specifies

@@ -30,3 +30,7 @@ ButtonWidget.prototype.doneLoading = function() {
 	this.widget.off("click");
 	this.widget.on("click", this.clickFunction);
 };
+
+ButtonWidget.prototype.trigger = function() {
+	this.widget.trigger("click");
+};

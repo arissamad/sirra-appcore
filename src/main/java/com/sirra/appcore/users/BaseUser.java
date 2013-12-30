@@ -37,9 +37,9 @@ public class BaseUser extends AccountEnabled {
 	 * @return
 	 */
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="UuidIfNotBlank")
-	@GenericGenerator(name="UuidIfNotBlank",
-	                  strategy="com.sirra.server.persistence.UuidGeneratorIfNotBlank"
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="SequenceStringIfNotBlank")
+	@GenericGenerator(name="SequenceStringIfNotBlank",
+	                  strategy="com.sirra.server.persistence.SequenceStringGeneratorIfNotBlank"
 	)
     public String getId() {
 		return id;

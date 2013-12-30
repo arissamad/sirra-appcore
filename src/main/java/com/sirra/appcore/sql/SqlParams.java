@@ -27,6 +27,12 @@ public class SqlParams {
 		sortColumns = new ArrayList();
 	}
 	
+	public static SqlParams flatList() {
+		SqlParams sqlParams = new SqlParams();
+		sqlParams.setNumItemsToRetrieve(10000);
+		return sqlParams;
+	}
+	
 	public void addConstraint(String constraint) {
 		constraints.add(constraint);
 	}

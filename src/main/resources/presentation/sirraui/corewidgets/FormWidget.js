@@ -9,6 +9,10 @@ function FormWidget(settings) {
 	
 	this.leftTd = this.widget.find("td.left");
 	this.rightTd = this.widget.find("td.right");
+	
+	this.leftTd.detach();
+	this.rightTd.detach();
+	
 	this.tr = this.widget.find("tr");
 	this.table = this.widget.find("table");
 	
@@ -30,6 +34,8 @@ FormWidget.prototype.label = function() {
 	current = td;
 	
 	if(this.settings.has("leftWidth")) td.width(this.settings.get("leftWidth"));
+	if(this.settings.has("leftMinWidth")) td.css("min-width", this.settings.get("leftMinWidth"));
+	if(this.settings.has("leftCss")) td.css(this.settings.get("leftCss"));
 };
 
 FormWidget.prototype.value = function() {
@@ -38,6 +44,7 @@ FormWidget.prototype.value = function() {
 	current = td;
 	
 	if(this.settings.has("rightWidth")) td.width(this.settings.get("rightWidth"));
+	if(this.settings.has("rightCss")) td.css(this.settings.get("rightCss"));
 };
 
 FormWidget.prototype.setValues = function(valueObject) {
@@ -58,4 +65,25 @@ FormWidget.prototype.link = function(metaId, inputWidget) {
 
 FormWidget.prototype.getValue = function(metaId) {
 	return this.links[metaId].getValue();
+};
+
+FormWidget.prototype.focus = function(metaId) {
+	if(metaId != null) {
+		this.links[metaId].input.focus();
+	} else {
+		for(var attr in this.links) {
+			this.links[attr].input.focus();
+			break;
+		}
+	}
+};
+
+FormWidget.prototype.submitOnEnter = function(action) {
+	for(var attr in this.links) {
+		if(this.links[attr].input != null) {
+			this.links[attr].input.enter(function() {
+				action.call();
+			});
+		}
+	}
 };

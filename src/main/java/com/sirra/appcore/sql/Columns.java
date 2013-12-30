@@ -21,6 +21,8 @@ import com.sirra.server.session.*;
  * @author aris
  */
 public class Columns {
+	
+	protected String tableName;
 	protected List<String> columns;
 	
 	public Columns(String... cols) {
@@ -52,6 +54,8 @@ public class Columns {
 			if(dcn != null) {
 				columns.add(dcn);
 			}
+			
+			tableName = persister.getTableName();
 		}
 	}
 	
@@ -76,6 +80,10 @@ public class Columns {
 		Iterator<String> colIt = getColumns().iterator();
 		while(colIt.hasNext()) {
 			String col = colIt.next();
+			
+			if(tableName != null) {
+				colString.append(tableName + ".");
+			}
 			colString.append(col);
 			
 			if(colIt.hasNext()) colString.append(", ");

@@ -1,6 +1,8 @@
 function ColumnWidget(settings) {
 	ClassUtil.mixin(ColumnWidget, this, Widget);
-	Widget.call(this, "ColumnWidget", true, settings);
+	Widget.call(this, "ColumnWidget", true, settings, false);
+	
+	this.settings.apply(this.widget.find("table"));
 	
 	this.td = this.widget.find("td");
 	this.td.detach();
@@ -17,6 +19,9 @@ ColumnWidget.prototype.addColumn = function(paddingMultiplier, settings) {
 	if(paddingMultiplier != null) {
 		newTd.css("padding-left", paddingMultiplier * 40);
 	}
+	
+	new Settings(settings).apply(newTd);
+	
 	
 	current = newTd;
 };

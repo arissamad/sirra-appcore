@@ -74,6 +74,20 @@ public class Finder {
 		else return (T) results.get(0);
 	}
 	
+	/**
+	 * Search by multiple equals critiera.
+	 * If there are multiple results, it returns the first (random) one.
+	 */
+	public <T> List<T> findMultipleByFields(Class<T> entityClass, Pair... fields) {
+		Criteria criteria = getSession().createCriteria(entityClass);
+		
+		for(int i=0; i<fields.length; i++) {
+			criteria.add(Restrictions.eq(fields[i].getKey(), fields[i].getValue()));
+		}
+		
+		return criteria.list();
+	}
+	
 	protected Session getSession() {
 		SirraSession ss = SirraSession.get();
 		return ss.getHibernateSession();

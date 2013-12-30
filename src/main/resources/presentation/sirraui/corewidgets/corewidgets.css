@@ -133,6 +133,7 @@ table.login-table .value input {
 .TextWidget {
 	white-space: pre-wrap;
 	display: inline;
+	vertical-align: baseline;
 }
 
 .TextWidget.editable {
@@ -204,6 +205,7 @@ table.login-table .value input {
 	cursor: default;
 	font-family: "Roboto Slab";
 	font-weight: 300;
+	vertical-align: baseline;
 }
 
 .ButtonWidget.active {
@@ -223,7 +225,7 @@ table.login-table .value input {
 .ButtonWidget .text-section {
 	display: inline-block;
 	padding: 6px 14px 6px 14px;
-	vertical-align: top;
+	vertical-align: baseline;
 }
 
 .ButtonWidget.thin .text-section {
@@ -249,6 +251,16 @@ table.login-table .value input {
 	font-weight: 300;
 	size: 0.8em;
 	display: inline-block;
+	vertical-align: baseline;
+}
+
+.LinkWidget .text-section {
+	display: inline;
+	vertical-align: baseline;
+}
+
+.LinkWidget.inactive .right-section {
+	display: inline;
 }
 
 .LinkWidget.bold-link {
@@ -467,4 +479,92 @@ table.login-table .value input {
 	padding: 20px;
 	background: white;
 	position: relative;
+}
+
+.DropDownWidget {
+	padding: 11px 0px;
+}
+
+.EasySelectorWidget .input-section {
+	color: #333;
+	outline: none;
+	padding: 7px 3px 3px 5px;
+	margin: 0px 0px 0px 0px;
+	border: 1px solid #999;
+	border-radius: 4px;
+}
+
+.EasySelectorWidget input {
+	vertical-align: top;
+	padding: 3px;
+}
+
+.EasySelectorWidget .item-holder {
+	display: inline-block;
+}
+	
+.EasySelectorWidget .item {
+	display: inline-block;
+	color: white;
+	background: #6DBCDB;
+	cursor: default;
+	padding: 0px 0px 0px 7px;
+	border-radius: 3px;
+	margin-right: 6px;
+	overflow: hidden;
+}
+
+.EasySelectorWidget .item span {
+	padding: 0px 5px 0px 0px;
+}
+
+.EasySelectorWidget .item .delete {
+	display: inline-block;
+	vertical-align: baseline;
+	padding: 3px 5px;
+	background: ee0000;
+	cursor: pointer;
+	color: #ccc;
+}
+
+.EasySelectorWidget .item .delete:hover {
+	color: white;
+	background: red;
+}
+
+.EasySelectorWidget .outer {
+	position: relative;
+	top: -1px;
+	width: 100%;
+}
+
+.EasySelectorWidget .inner {
+	position: absolute;
+	width: 100%;
+	background: white;
+}
+
+.EasySelectorWidget .frame {
+	padding: 5px 0px 5px 0px;
+	border: 1px solid #6DBCDB;
+	border-radius: 2px;
+}
+
+.EasySelectorWidget .option {
+	padding: 4px 8px 3px 8px;
+	cursor: pointer;
+}
+
+.EasySelectorWidget .option:hover {
+	background: #D3EBF4;
+}
+
+.EasySelectorWidget .frame-bottom {
+	display: none;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.EasySelectorWidget .frame-bottom:hover {
+	color: red;
 }

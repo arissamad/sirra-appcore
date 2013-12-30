@@ -47,6 +47,22 @@ public class PlainDate {
 		return date;
 	}
 	
+	public Date getTimezoneMidnightDate(String timezone) {
+		SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
+		
+		if(timezone != null) {
+			TimeZone timeZone = TimeZone.getTimeZone(timezone);
+			isoFormat.setTimeZone(timeZone);
+		}
+		
+		try {
+			Date date = isoFormat.parse(plainDateStr);
+			return date;
+		} catch(ParseException e) {
+			throw new RuntimeException(e);
+		}
+	}
+	
 	public String toString() {
 		return plainDateStr;
 	}
