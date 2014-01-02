@@ -7,8 +7,6 @@ import org.reflections.*;
 
 public class ListUtil {
 	
-	
-	
 	public static <VO> Map<String, VO> mapList(List<VO> theList, String keyAttribute) {
 		Map<String, VO> resultMap = new HashMap();
 		
@@ -38,7 +36,7 @@ public class ListUtil {
 			try {
 				field = vo.getClass().getDeclaredField(keyAttribute);
 			} catch(Exception e) {
-				Set<Field> fields = ReflectionUtils.getAllFields(vo.getClass());
+				Set<Field> fields = ReflectionCache.getFields(vo.getClass());
 				
 				for(Field currField: fields) {
 					if(currField.getName().equals(keyAttribute)) {

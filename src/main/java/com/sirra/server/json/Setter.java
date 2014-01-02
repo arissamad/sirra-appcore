@@ -5,6 +5,8 @@ import java.util.*;
 
 import org.reflections.*;
 
+import com.sirra.appcore.util.*;
+
 /**
  * Sets an object's attribute according to these rules:
  * 
@@ -20,7 +22,7 @@ public class Setter {
 		String setterName = "set" + attributeName.substring(0, 1).toUpperCase() + attributeName.substring(1);
 		
 		try {
-			Set<Method> methods = ReflectionUtils.getAllMethods(obj.getClass(), ReflectionUtils.withName(setterName));
+			Set<Method> methods = ReflectionCache.getMethods(obj.getClass(), setterName);
 			
 			if(methods.size() > 0) {
 				Method method = methods.iterator().next();

@@ -177,9 +177,7 @@ public class JsonUtil {
 			}
 			
 			if(json.containsKey("_s_type")) {
-				
-				Reflections reflections = new Reflections(ApiServlet.getAPIPackageBase());
-		    	Set<Class<? extends SirraSerializable>> classes = reflections.getSubTypesOf(SirraSerializable.class);
+		    	Set<Class<? extends SirraSerializable>> classes = ReflectionCache.getSubTypesOf(SirraSerializable.class);
 		    	
 		    	String className = (String) json.get("_s_type");
 		    	

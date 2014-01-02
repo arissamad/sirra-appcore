@@ -11,6 +11,7 @@ import org.hibernate.metadata.*;
 import org.hibernate.persister.entity.*;
 import org.reflections.*;
 
+import com.sirra.appcore.util.*;
 import com.sirra.server.json.*;
 import com.sirra.server.rest.*;
 import com.sirra.server.session.*;
@@ -103,8 +104,7 @@ public class Columns {
 			if(discriminatorAnnotation != null) {
 				discriminatorName = discriminatorAnnotation.name();
 				
-				Reflections reflections = new Reflections(ApiServlet.getAPIPackageBase());
-		    	Set classes = reflections.getSubTypesOf(entityClass);
+		    	Set classes = ReflectionCache.getSubTypesOf(entityClass);
 		    	
 		    	for(Object classObject: classes) {
 		    		Class clazz = (Class) classObject;
