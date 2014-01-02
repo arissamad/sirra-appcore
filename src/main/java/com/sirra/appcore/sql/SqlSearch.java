@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.hibernate.*;
 
+import com.sirra.appcore.util.leakdebugging.*;
 import com.sirra.server.json.*;
 import com.sirra.server.session.*;
 import com.sirra.server.templating.*;
@@ -33,14 +34,27 @@ public class SqlSearch {
 			sqlParams = new SqlParams();
 		}
 		
+		LeakDebugger.check(2.1);
+		
 		sql = construct(sql, sqlParams);
+		
+		LeakDebugger.check(2.1);
 		
 		SQLQuery query = SirraSession.get().getHibernateSession().createSQLQuery(sql);
 		
+		LeakDebugger.check(2.2);
+		
 		query.setFirstResult(sqlParams.getStartIndex());
+		
+		LeakDebugger.check(2.3);
+		
 		query.setMaxResults(sqlParams.getNumItemsToRetrieve());
 		
+		LeakDebugger.check(2.4);
+		
 		List<Object[]> results = query.list();
+		
+		LeakDebugger.check(2.5);
 		
 		return convert(results, columns);
 	}
@@ -52,11 +66,20 @@ public class SqlSearch {
 	public static <T> List<T> search(Class entityClass, String sql, SqlParams sqlParams) {
 		Columns columns = new Columns(entityClass);
 
+		LeakDebugger.check(1);
+		
 		sql = Template.replace(sql, "columns", columns.getForSelect());
 
+		LeakDebugger.check(2);
+		
 		List<Data> dataList = SqlSearch.search(sql, columns, sqlParams);
 		
+		LeakDebugger.check(3);
+		
 		List<T> resultList = columns.materialize(dataList);
+		
+		LeakDebugger.check(4);
+		
 		return resultList;
 	}
 
@@ -79,6 +102,8 @@ public class SqlSearch {
 				d.put(columns.get(0), item);
 			}
 		}
+		
+		LeakDebugger.check(2.6);
 		
 		return resultList;
 	}
