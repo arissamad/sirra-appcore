@@ -25,9 +25,12 @@ public class Columns {
 	
 	protected String tableName;
 	protected List<String> columns;
+	protected List<String> extraColumns;
 	
 	public Columns(String... cols) {
 		columns = new ArrayList();
+		extraColumns = new ArrayList();
+		
 		for(String col: cols) {
 			columns.add(col);
 		}
@@ -36,6 +39,7 @@ public class Columns {
 	protected Class entityClass;
 	public Columns(Class entityClass) {
 		columns = new ArrayList();
+		extraColumns = new ArrayList();
 		
 		this.entityClass = entityClass;
 		
@@ -64,8 +68,19 @@ public class Columns {
 		columns.add(col);
 	}
 	
+	public void addExtraColumns(ExtraColumns extraColumns) {
+		for(String col: extraColumns.getColumns()) {
+			this.extraColumns.add(col);
+		}
+	}
+	
 	public String get(int index) {
-		return columns.get(index);
+		if(index < columns.size()) {
+			return columns.get(index);
+		} else {
+			// See if can get from extra columns
+			return extraColumns.get(index - columns.size());
+		}
 	}
 	
 	public int size() {
@@ -129,6 +144,15 @@ public class Columns {
 				for(String fieldName: getColumns()) {
 					Object value = data.get(fieldName);
 					Setter.set(object, fieldName, value);
+				}
+				
+				if(extraColumns != null && extraColumns.size() > 0) {
+					EntityBase entityBase = (EntityBase) object;
+					
+					for(String extraFieldName: extraColumns) {
+						Object value = data.get(extraFieldName);
+						entityBase.put(extraFieldName, value);
+					}
 				}
 				
 				resultList.add(object);

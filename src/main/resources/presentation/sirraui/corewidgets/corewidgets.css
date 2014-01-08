@@ -13,13 +13,18 @@ small, .small {
 .subheader-style {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	font-size: 1.6em;
+	font-size: 1.5em;
 }
 
 .alert {
 	color: red;
 	font-weight: bold;
 	font-size: 1.1em;
+}
+
+.note {
+	color: red;
+	font-style: italic;
 }
 
 .inline-block {
@@ -154,7 +159,7 @@ table.login-table .value input {
 
 /** LabelWidget **/
 .LabelWidget {
-	float: right;
+	text-align: right;
 	color: #333;
 	font-family: "Quattrocento Sans";
 }
@@ -454,6 +459,11 @@ table.login-table .value input {
 }
 
 /** DialogWidget **/
+
+.DialogWidget {
+	overflow: visible !important;
+}
+
 .DialogWidget .dw-content {
 	padding-top: 10px;
 }
@@ -571,4 +581,17 @@ table.login-table .value input {
 
 .ThumbWidget {
 	margin-right: 20px !important;
+}
+
+.ModeWidget {
+	float: right;
+}
+
+.CheckboxWidget {
+	display: inline;
+	vertical-align: baseline;
+}
+
+.CheckboxWidget input {
+	vertical-align: baseline;
 }

@@ -4,6 +4,7 @@ import java.util.*;
 
 import org.hibernate.*;
 
+import com.sirra.appcore.util.*;
 import com.sirra.appcore.util.leakdebugging.*;
 import com.sirra.server.json.*;
 import com.sirra.server.session.*;
@@ -19,6 +20,7 @@ public class SqlSearch {
 	
 	// Tables which are shared across multiple accounts.
 	protected static List<String> sharedTables;
+	protected static List<String> deletableTables; 
 
 	public static Data singleSearch(String sql, Columns columns, SqlParams sqlParams) {
 		List<Data> results = search(sql, columns, sqlParams);
@@ -49,10 +51,24 @@ public class SqlSearch {
 	/**
 	 * Ultra-convenient search that returns objects in the target type, with attributes all filled in.
 	 * Be sure to use "${columns}" placeholder for the column names to select, i.e. SELECT ${columns} FROM...
+	 * 
+	 * You can add other columns from other tables too:
+	 *   1. Add the extra column names in the SELECT clause, i.e. SELECT ${columns}, users.name FROM...
+	 *   2. Pass in the extra column names
 	 */
+	public static <T> List<T> search(Class entityClass, String sql, ExtraColumns extraColumns, SqlParams sqlParams) {
+		Columns columns = new Columns(entityClass);
+		columns.addExtraColumns(extraColumns);
+		
+		return privateSearch(entityClass, sql, sqlParams, columns);
+	}
+	
 	public static <T> List<T> search(Class entityClass, String sql, SqlParams sqlParams) {
 		Columns columns = new Columns(entityClass);
-
+		return privateSearch(entityClass, sql, sqlParams, columns);
+	}
+	
+	protected static <T> List<T> privateSearch(Class entityClass, String sql, SqlParams sqlParams, Columns columns) {
 		sql = Template.replace(sql, "columns", columns.getForSelect());
 		
 		List<Data> dataList = SqlSearch.search(sql, columns, sqlParams);
@@ -127,9 +143,20 @@ public class SqlSearch {
 				sharedTables.add("accounts");
 			}
 			
+			if(deletableTables == null) {
+				deletableTables = new ArrayList();
+				
+				// for now. Will use annotations to get this information later.
+				deletableTables.add("payments");
+			}
+			
 			for(String table: tables) {
 				if(!sharedTables.contains(table.toLowerCase())) {
 					sqlParams.addConstraint(table + ".accountId = '" + accountId + "'");
+				}
+				
+				if(deletableTables.contains(table.toLowerCase())) {
+					sqlParams.addConstraint(table + ".deleted = false");
 				}
 			}
 		}

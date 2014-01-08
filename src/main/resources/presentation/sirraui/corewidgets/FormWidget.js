@@ -47,6 +47,10 @@ FormWidget.prototype.value = function() {
 	if(this.settings.has("rightCss")) td.css(this.settings.get("rightCss"));
 };
 
+FormWidget.prototype.setValue = function(metaId, value) {
+	if(this.links[metaId] != null) this.links[metaId].setValue(value);
+};
+
 FormWidget.prototype.setValues = function(valueObject) {
 	if(valueObject != null) {
 		for(var metaId in this.links) {

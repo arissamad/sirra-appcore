@@ -10,6 +10,7 @@ import org.eclipse.jetty.util.ajax.*;
 import org.json.*;
 import org.reflections.*;
 
+import com.sirra.appcore.util.*;
 import com.sirra.server.json.*;
 import com.sirra.server.rest.annotations.*;
 
@@ -157,7 +158,7 @@ public class AnnotatedMethodCaller {
 					}
 				}
 				else if(parameterType.equals(double.class)) {
-					if(value == null) {
+					if(value == null || value.equals("")) {
 						values.add(0.0d);
 					} else {
 						values.add(new Double(value));
@@ -166,8 +167,12 @@ public class AnnotatedMethodCaller {
 				else if(parameterType.equals(String.class)) {
 					values.add(value);
 				}
-				else if(parameterType.equals(Boolean.class)) {
-					values.add(Boolean.parseBoolean(value));
+				else if(parameterType.equals(Boolean.class) || parameterType.equals(boolean.class)) {
+					if(value == null) {
+						values.add(false);
+					} else {
+						values.add(Boolean.parseBoolean(value));
+					}
 				}
 				else if(parameterType.equals(Date.class)) {
 					if(value == null) values.add(null);
@@ -175,6 +180,12 @@ public class AnnotatedMethodCaller {
 						Long l = Long.parseLong(value);
 						Date date = new Date(l);
 						values.add(date);
+					}
+				}
+				else if(parameterType.equals(PlainDate.class)) {
+					if(value == null) values.add(null);
+					else {
+						values.add(new PlainDate(value));
 					}
 				}
 				else {

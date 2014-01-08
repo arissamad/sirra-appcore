@@ -27,9 +27,7 @@ public class StackTrace {
 				"summary", message,
 				"errorDetails", ExceptionUtil.getStackTrace(t)));
 		
-		Email.send("Sirra Voicemail Error", em, 
-				new EmailPerson("Sirra Voicemail", "support@sirravoicemail.com"),
-				new EmailPerson("Aris Samad", "aris.samad@gmail.com"));
+		Email.send("SirraTeam Error", em, EmailPerson.me());
 	}
 	
 	/**
@@ -43,8 +41,6 @@ public class StackTrace {
 				"summary", message,
 				"errorDetails", ExceptionUtil.getStackTrace(t)));
 		
-		Email.send("Sirra Voicemail Error", em, 
-				new EmailPerson("Sirra Voicemail", "support@sirravoicemail.com"),
-				new EmailPerson("Aris Samad", "aris.samad@gmail.com"));
+		Email.send("SirraTeam Error", em, EmailPerson.me());
 	}
 }

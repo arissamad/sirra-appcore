@@ -9,6 +9,14 @@ import javax.mail.Message.RecipientType;
  */
 public class EmailPerson {
 	
+	protected static String defaultName;
+	protected static String defaultEmail;
+	
+	public static void configure(String defaultName, String defaultEmail) {
+		EmailPerson.defaultName = defaultName;
+		EmailPerson.defaultEmail = defaultEmail;
+	}
+	
 	protected RecipientType type;
 	protected String name;
 	protected String email;
@@ -46,7 +54,7 @@ public class EmailPerson {
 	}
 	
 	public static EmailPerson defaultSender() {
-		return new EmailPerson("Sirra Voicemail", "support@sirravoicemail.com");
+		return new EmailPerson(defaultName, defaultEmail);
 	}
 	
 	public static EmailPerson me() {

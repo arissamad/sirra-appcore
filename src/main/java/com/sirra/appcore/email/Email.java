@@ -49,10 +49,10 @@ public class Email implements Runnable {
 		try {
 			Properties props = new Properties();
 			
-			props.put("mail.transport.protocol", "smtp");
+			props.setProperty("mail.transport.protocol", "smtp");
 			props.setProperty("mail.smtp.host", "smtp.sendgrid.net");
-			props.put("mail.smtp.port", 587);
-			props.put("mail.smtp.auth", "true");
+			props.setProperty("mail.smtp.port", "587");
+			props.setProperty("mail.smtp.auth", "true");
 			
 	        Session mailSession = Session.getDefaultInstance(props, SMTPAuthenticator.get());
 	
