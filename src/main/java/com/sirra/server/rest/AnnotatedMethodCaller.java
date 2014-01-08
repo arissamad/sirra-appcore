@@ -157,6 +157,13 @@ public class AnnotatedMethodCaller {
 						values.add(new Integer(value));
 					}
 				}
+				else if(parameterType.equals(Double.class)) {
+					if(value == null || value.equals("")) {
+						values.add(null);
+					} else {
+						values.add(new Double(value));
+					}
+				}
 				else if(parameterType.equals(double.class)) {
 					if(value == null || value.equals("")) {
 						values.add(0.0d);
@@ -167,7 +174,14 @@ public class AnnotatedMethodCaller {
 				else if(parameterType.equals(String.class)) {
 					values.add(value);
 				}
-				else if(parameterType.equals(Boolean.class) || parameterType.equals(boolean.class)) {
+				else if(parameterType.equals(Boolean.class)) {
+					if(value == null) {
+						values.add(null);
+					} else {
+						values.add(Boolean.parseBoolean(value));
+					}
+				}
+				else if(parameterType.equals(boolean.class)) {
 					if(value == null) {
 						values.add(false);
 					} else {

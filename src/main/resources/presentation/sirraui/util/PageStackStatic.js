@@ -9,10 +9,13 @@ PageStackStatic.prototype.push = function() {
 	var contents = current.children();
 	
 	if(contents.length > 0) {
+		var scrollTop = $(window).scrollTop();
+		
 		this.stack.push({
 			jq: contents.detach(),
 			url: History.getPageUrl(),
-			title: document.title
+			title: document.title,
+			scrollTop: scrollTop
 		});	
 	}
 };
@@ -27,6 +30,8 @@ PageStackStatic.prototype.pop = function() {
 	
 	current.append(data.jq);
 	History.pushState({}, data.title, data.url);
+	
+	$(window).scrollTop(data.scrollTop);
 	
 	return true;
 };
