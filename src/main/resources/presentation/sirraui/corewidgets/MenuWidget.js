@@ -54,6 +54,8 @@ MenuWidget.prototype._renderPage = function(metaId) {
 	var menu = this.menuJqLookup[metaId].data("menu");
 	
 	History.pushState({}, menu.name, "/" + menu.metaId);
+	trackPage();
+	
 	current = $(".app-content");
 	current.empty();
 	

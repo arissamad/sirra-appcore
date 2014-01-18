@@ -29,6 +29,7 @@ PageStackStatic.prototype.pop = function() {
 	var data = this.stack.pop();
 	
 	current.append(data.jq);
+	
 	History.pushState({}, data.title, data.url);
 	
 	$(window).scrollTop(data.scrollTop);
