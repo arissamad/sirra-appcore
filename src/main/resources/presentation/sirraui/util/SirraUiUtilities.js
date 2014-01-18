@@ -9,11 +9,6 @@ var isFunction = function(theObject) {
 
 //Google Analytics
 function trackPage() {
-	var location = window.location.protocol +
-    '//' + window.location.hostname +
-    window.location.pathname +
-    window.location.search;
-	
-	log("Tracking " + location);
-	if(window.ga != null) ga('send', 'pageview');
+	log("Tracking " + window.location.pathname);
+	if(window.ga != null) ga('send', 'pageview', window.location.pathname);
 }
