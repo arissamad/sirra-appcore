@@ -8,6 +8,12 @@ import com.sirra.appcore.email.*;
  */
 public class StackTrace {
 	
+	protected static String appName = "Sirra";
+	
+	public static void setAppName(String appName) {
+		StackTrace.appName = appName;
+	}
+	
 	public static String get(Throwable t) {
 		return ExceptionUtil.getStackTrace(t);
 	}
@@ -27,7 +33,7 @@ public class StackTrace {
 				"summary", message,
 				"errorDetails", ExceptionUtil.getStackTrace(t)));
 		
-		Email.send("SirraTeam Error", em, EmailPerson.me());
+		Email.send(appName + " Error", em, EmailPerson.me());
 	}
 	
 	/**
@@ -41,6 +47,6 @@ public class StackTrace {
 				"summary", message,
 				"errorDetails", ExceptionUtil.getStackTrace(t)));
 		
-		Email.send("SirraTeam Error", em, EmailPerson.me());
+		Email.send(appName + " Error", em, EmailPerson.me());
 	}
 }
