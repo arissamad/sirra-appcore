@@ -14,9 +14,7 @@ function DialogWidget(title, settings) {
 }
 
 DialogWidget.prototype.reposition = function() {
-	this.widget.dialog({
-		position: "center"
-	});
+	this.widget.dialog({position:[null, (window.innerHeight/2) - (this.widget.height()/2) - 80]});
 };
 
 DialogWidget.prototype.close = function() {
