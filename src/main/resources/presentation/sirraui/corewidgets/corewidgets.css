@@ -595,3 +595,15 @@ table.login-table .value input {
 .CheckboxWidget input {
 	vertical-align: baseline;
 }
+
+.FullWidthWidget {
+	position: absolute;
+	left: 0px;
+	width: 100%;
+	min-width: 900px;
+	background: white;
+}
+
+.FullWidthWidget .content {
+	margin: 0 40px;
+}

@@ -30,7 +30,7 @@ ResetPasswordWidget.prototype.render = function() {
 	
 	new LW(4);
 	
-	new DivWidget(null, {css: {width: "500px", margin: "0 auto", "text-align": "center"}});
+	new DivWidget({css: {width: "500px", margin: "0 auto", "text-align": "center"}});
 	
 	var fw = new FormWidget({
 		tableWidth: "100%"

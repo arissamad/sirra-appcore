@@ -1,4 +1,4 @@
-function ColumnWidget(settings) {
+function ColumnWidget(settings, firstColumnSettings) {
 	ClassUtil.mixin(ColumnWidget, this, Widget);
 	Widget.call(this, "ColumnWidget", true, settings, false);
 	
@@ -9,7 +9,7 @@ function ColumnWidget(settings) {
 	
 	this.tr = this.widget.find("tr");
 	
-	this.addColumn(0);
+	this.addColumn(0, firstColumnSettings);
 }
 
 ColumnWidget.prototype.addColumn = function(paddingMultiplier, settings) {
