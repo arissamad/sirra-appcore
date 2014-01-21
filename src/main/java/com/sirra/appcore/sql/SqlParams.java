@@ -10,7 +10,9 @@ import java.util.*;
 public class SqlParams {
 	
 	protected int startIndex = 0;
-	protected int numItemsToRetrieve = 10;
+	
+	// Default is flat list.
+	protected int numItemsToRetrieve = 10000;
 	
 	protected List<String> constraints;
 	protected Map<String, List<String>> orConstraints;
@@ -25,12 +27,6 @@ public class SqlParams {
 		constraints = new ArrayList();
 		orConstraints = new HashMap();
 		sortColumns = new ArrayList();
-	}
-	
-	public static SqlParams flatList() {
-		SqlParams sqlParams = new SqlParams();
-		sqlParams.setNumItemsToRetrieve(10000);
-		return sqlParams;
 	}
 	
 	public void addConstraint(String constraint) {

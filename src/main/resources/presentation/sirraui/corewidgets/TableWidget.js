@@ -163,6 +163,7 @@ TableWidget.prototype.setLoader = function(loaderAction) {
 		this.table.css("opacity", 0.3);
 		var sqlParams = new Object();
 		sqlParams._page = this.page;
+		sqlParams._limit = 10;
 		if(this.searchTerm != null) sqlParams._search = this.searchTerm;
 		loaderAction.call(sqlParams);
 	});
@@ -180,6 +181,8 @@ TableWidget.prototype.setLoaderResource = function(resourcePath, apiParameters) 
 		}
 		
 		parameters._page = this.page;
+		parameters._limit = 10;
+		
 		if(this.searchTerm != null) {
 			parameters._search = this.searchTerm;
 		} else {
