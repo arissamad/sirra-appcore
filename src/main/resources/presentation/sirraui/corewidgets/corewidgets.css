@@ -4,6 +4,14 @@ small, .small {
 	line-height: 1.2;
 }
 
+small.heading, .small.heading {
+	font-style: normal;
+}
+
+em, .em {
+	color: #f98700;
+}
+
 /* Styles */
 .header-style {
 	padding-top: 10px;
