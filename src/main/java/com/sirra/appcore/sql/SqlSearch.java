@@ -2,11 +2,16 @@ package com.sirra.appcore.sql;
 
 import java.util.*;
 
-import org.hibernate.*;
+import javax.persistence.*;
 
+import org.hibernate.*;
+import org.reflections.*;
+
+import com.sirra.appcore.accounts.*;
 import com.sirra.appcore.util.*;
 import com.sirra.appcore.util.leakdebugging.*;
 import com.sirra.server.json.*;
+import com.sirra.server.rest.*;
 import com.sirra.server.session.*;
 import com.sirra.server.templating.*;
 
@@ -19,8 +24,29 @@ import com.sirra.server.templating.*;
 public class SqlSearch {
 	
 	// Tables which are shared across multiple accounts.
-	protected static List<String> sharedTables;
-	protected static List<String> deletableTables; 
+	protected static Set<String> sharedTables;
+	protected static List<String> deletableTables;
+	
+	public static void initSharedTables(String entityPackage) {
+		sharedTables = new HashSet();
+		
+		Reflections reflections = new Reflections(entityPackage);
+    	Set<Class<?>> entityClasses = reflections.getTypesAnnotatedWith(Entity.class);
+    	
+    	Reflections reflections2 = new Reflections("com.sirra");
+    	entityClasses.addAll(reflections2.getTypesAnnotatedWith(Entity.class));
+    	
+    	for(Class entityClass: entityClasses) {
+    		if(AccountEnabled.class.isAssignableFrom(entityClass)) {
+    		} else {
+    			System.out.println("Adding shared entity class (not account enabled): " + entityClass.getName());
+    			
+    			Table tableAnnotation = (Table) entityClass.getAnnotation(Table.class);
+    			sharedTables.add(tableAnnotation.name().toLowerCase());
+    		}
+    	}
+
+	}
 
 	public static Data singleSearch(String sql, Columns columns, SqlParams sqlParams) {
 		List<Data> results = search(sql, columns, sqlParams);
@@ -137,7 +163,7 @@ public class SqlSearch {
 			}
 			
 			if(sharedTables == null) {
-				sharedTables = new ArrayList();
+				sharedTables = new HashSet();
 				
 				// for now. Will use annotations to get this information later.
 				sharedTables.add("accounts");

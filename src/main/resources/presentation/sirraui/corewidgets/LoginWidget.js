@@ -66,7 +66,7 @@ function LoginWidget() {
 	});
 	
 	this.widget.find(".forgot-password").click($IA(this, function() {
-		var dialog = new DialogWidget("Forgot password?", {width: 500});
+		var dialog = new DialogWidget("Forgot password?", 500);
 		
 		new LW();
 		new TextWidget("Enter your email below and we'll send you a link to change your password.")
@@ -103,7 +103,7 @@ function LoginWidget() {
 						updateButton.doneLoading();
 						dialog.close();
 
-						var dialog2 = new DialogWidget("Forgot password?", {width: "500px"});
+						var dialog2 = new DialogWidget("Forgot password?", 500);
 						new LW(2);
 						new TextWidget("Thank you. We've emailed you a link to reset your password. The link will expire in 24 hours, so please click on it soon.\n\n" +
 								"If you're still facing problems logging in, please email support@sirrateam.com.")

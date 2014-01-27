@@ -12,6 +12,11 @@ em, .em {
 	color: #f98700;
 }
 
+.center-text {
+	display: block !important;
+	text-align: center;
+}
+
 /* Styles */
 .header-style {
 	padding-top: 10px;

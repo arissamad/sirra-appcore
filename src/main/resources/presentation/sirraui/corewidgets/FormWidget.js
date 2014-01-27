@@ -23,6 +23,7 @@ function FormWidget(settings) {
 	if(this.settings.has("tableWidth")) this.table.width(this.settings.get("tableWidth"));
 	
 	this.links = {};
+	this.verifiers = {};
 }
 
 FormWidget.prototype.label = function() {
@@ -74,8 +75,9 @@ FormWidget.prototype.setValues = function(valueObject) {
 	}
 };
 
-FormWidget.prototype.link = function(metaId, inputWidget) {
+FormWidget.prototype.link = function(metaId, inputWidget, verifier) {
 	this.links[metaId] = inputWidget;
+	if(verifier != null) this.verifiers[metaId] = verifier;
 };
 
 FormWidget.prototype.getValue = function(metaId) {
@@ -102,4 +104,40 @@ FormWidget.prototype.submitOnEnter = function(action) {
 			});
 		}
 	}
+};
+
+FormWidget.prototype.verify = function() {
+	var problems = [];
+	
+	for(var metaId in this.links) {
+		var widget = this.links[metaId];
+		var value = widget.getValue();
+		
+		var verifier = this.verifiers[metaId];
+		
+		if(verifier == null) continue;
+		
+		for(var i=0; i<verifier.checkers.length; i++) {
+			var checker = verifier.checkers[i];
+			
+			var result = checker.verify(value);
+			if(result == true) continue;
+			
+			problems.push({name: verifier.name, message: result});
+			break;
+		}
+	}
+	
+	if(problems.length == 0) return true;
+	
+	var dialog = new DialogWidget("Problems with your entries", 500);
+	for(var i=0; i<problems.length; i++) {
+		new TextWidget(problems[i].name + ": " + problems[i].message);
+		new LW(0);
+	}
+	dialog.buttons();
+	new ButtonWidget("OK", $A(dialog, "close"));
+	dialog.reposition();
+	
+	return false;
 };

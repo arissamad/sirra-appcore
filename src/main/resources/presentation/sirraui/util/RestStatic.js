@@ -68,7 +68,7 @@ RestStatic.prototype.call = function(httpMethod, path, parameters, action) {
 	    error: function(xmlHttpRequest, textStatus, errorThrown) {
 	    	var json = JSON.parse(xmlHttpRequest.responseText);
 	    	
-	    	var dialog = new DialogWidget("Error", {width:500});
+	    	var dialog = new DialogWidget("Error", 500);
 	    	new TextWidget("Error code: " + json.errorCode + "\n\n" + json.errorMessage);
 	    }
 	});
