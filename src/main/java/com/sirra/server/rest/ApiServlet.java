@@ -70,6 +70,8 @@ public class ApiServlet extends HttpServlet {
 	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
+		// For IE
+		response.setHeader("Cache-Control", "no-store, no-cache");
     	execute(request, response);
     }
 

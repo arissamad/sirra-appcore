@@ -51,6 +51,7 @@ RestStatic.prototype.call = function(httpMethod, path, parameters, action) {
 	    data: data,
 	    dataType: "text",
 	    url: path,
+	    cache: false,
 	    success: function(data) {
 	    	var result = JSON.parse(data, function(key, value) {
 	    		if(value != null && value.type != null) {
