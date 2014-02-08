@@ -99,6 +99,9 @@ FormWidget.prototype.focus = function(metaId) {
 FormWidget.prototype.submitOnEnter = function(action) {
 	for(var attr in this.links) {
 		if(this.links[attr].input != null) {
+			
+			if(this.links[attr].input.is("textarea")) return;
+			
 			this.links[attr].input.enter(function() {
 				action.call();
 			});
