@@ -32,7 +32,7 @@ public class Getter {
 		} catch(NoSuchFieldException e) {
 			// Okay move on
 		} catch(Exception e) {
-			System.out.println("Whoops");
+			System.out.println("Whoops: Can't get attribute: " + attributeName + " from class: " + obj.getClass().getSimpleName());
 		}
 		
 		return null;

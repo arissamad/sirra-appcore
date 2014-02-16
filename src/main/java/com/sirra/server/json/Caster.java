@@ -37,6 +37,9 @@ public class Caster {
 		else if(parameterType.equals(Boolean.class)) {
 			return Boolean.parseBoolean(value.toString());
 		}
+		else if(parameterType.isEnum()) {
+			return Enum.valueOf(parameterType, (String) value);
+		}
 		return value;
 	}
 	

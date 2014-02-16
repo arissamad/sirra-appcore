@@ -34,7 +34,8 @@ public class Setter {
 					if(value != null && paramTypes[0] != value.getClass()) {
 						castedValue = Caster.cast(paramTypes[0], value);
 					}
-					method.invoke(obj, castedValue);	
+					method.invoke(obj, castedValue);
+					return;
 				}
 			}
 		} catch(Exception e) {
@@ -49,7 +50,7 @@ public class Setter {
 		} catch(NoSuchFieldException e) {
 			// Okay move on
 		} catch(Exception e) {
-			System.out.println("Whoops");
+			System.out.println("Whoops: Can't set attribute: " + attributeName + " on class: " + obj.getClass().getSimpleName());
 		}
 	}
 }

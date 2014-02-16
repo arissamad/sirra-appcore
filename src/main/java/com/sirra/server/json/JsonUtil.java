@@ -78,6 +78,10 @@ public class JsonUtil {
 		} else if(Date.class.isInstance(obj)) {
 			Date date = (Date) obj;
 			return date.getTime();
+		} else if(obj.getClass().isEnum()) {
+			// Danger: This is not bidirectional to the front-end. Once it is a string, you can't identify the type anymore.
+			// But with DB storage it can still work because the Caster can identify that the field type is an enum.
+			return ((Enum)obj).name();
 		}
 		// Else, retrieve all the fields in the object using reflection
 		
@@ -203,6 +207,8 @@ public class JsonUtil {
 				// Instantiate native object
 				return json;
 			}
+			
+			// Remember that json implements Map.
 			return json;
 		}
 		else {
