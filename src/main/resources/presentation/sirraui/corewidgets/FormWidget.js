@@ -48,6 +48,10 @@ FormWidget.prototype.value = function() {
 	if(this.settings.has("rightCss")) td.css(this.settings.get("rightCss"));
 };
 
+FormWidget.prototype.getCurrentRow = function() {
+	return this.currentTr;
+};
+
 FormWidget.prototype.setValue = function(metaId, value) {
 	if(this.links[metaId] != null) this.links[metaId].setValue(value);
 };

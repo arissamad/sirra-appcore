@@ -62,4 +62,34 @@ public class ListUtil {
 		
 		return set;
 	}
+	
+	public static List<String> convertStringToList(String str) {
+		List<String> result = new ArrayList();
+		
+		if(str == null) return result;
+		str = str.trim();
+		if(str.equals("")) return result;
+		
+		String[] pieces = str.split("\n");
+		
+		for(String piece: pieces) {
+			result.add(piece);
+		}
+		
+		return result;
+	}
+	
+	public static String convertListToString(List<String> strList) {
+		StringBuffer str = new StringBuffer();
+		
+		Iterator<String> it = strList.iterator();
+		
+		while(it.hasNext()) {
+			str.append(it.next());
+			
+			if(it.hasNext()) str.append("\n");
+		}
+		
+		return str.toString();
+	}
 }

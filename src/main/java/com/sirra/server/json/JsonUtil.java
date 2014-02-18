@@ -82,6 +82,8 @@ public class JsonUtil {
 			// Danger: This is not bidirectional to the front-end. Once it is a string, you can't identify the type anymore.
 			// But with DB storage it can still work because the Caster can identify that the field type is an enum.
 			return ((Enum)obj).name();
+		} else if(PlainDate.class.isInstance(obj)) {
+			return ((PlainDate)obj).toString();
 		}
 		// Else, retrieve all the fields in the object using reflection
 		

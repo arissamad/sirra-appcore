@@ -219,6 +219,7 @@ table.login-table .value input {
 	display: inline-block;
 	border-radius: 4px;
 	background: #263545;
+	border: 1px solid transparent;
 	color: #0000ff;
 	cursor: default;
 	font-family: "Roboto Slab";
