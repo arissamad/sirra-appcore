@@ -3,10 +3,10 @@
   <groupId>com.sirra</groupId>
   <artifactId>sirra-appcore</artifactId>
   <versioning>
-    <release>1.33</release>
+    <release>1.34</release>
     <versions>
-      <version>1.33</version>
+      <version>1.34</version>
     </versions>
-    <lastUpdated>20140216225354</lastUpdated>
+    <lastUpdated>20140218160135</lastUpdated>
   </versioning>
 </metadata>
