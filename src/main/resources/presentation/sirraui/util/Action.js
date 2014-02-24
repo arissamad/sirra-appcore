@@ -50,6 +50,6 @@ function $IA(actionObject, actionMethod, params) {
 	var action = new Action(Array.prototype.slice.call(arguments));
 	return function() {
 		var paramArray = Array.prototype.slice.call(arguments);
-		action.call.apply(action, paramArray);
+		return action.call.apply(action, paramArray);
 	}
 }

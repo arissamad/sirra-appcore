@@ -168,4 +168,19 @@ public class ApiBase extends HttpServlet
 		
 		return attributes;
 	}
+	
+	/**
+	 * Helpful when calling API methods from java-side.
+	 */
+	public void addAttributes(String... incoming) {
+		if(attributes == null) {
+			attributes = new ArrayList();
+		}
+		
+		for(int i=0; i<incoming.length; i++) {
+			if(!attributes.contains(incoming[i])) {
+				attributes.add(incoming[i]);
+			}
+		}
+	}
 }
