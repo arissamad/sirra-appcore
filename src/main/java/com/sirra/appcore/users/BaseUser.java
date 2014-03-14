@@ -18,18 +18,27 @@ import com.sirra.appcore.util.*;
 @MappedSuperclass
 public class BaseUser extends AccountEnabled {
 	
+	protected Date creationDate;
+	
 	protected String id;
 	protected String facebookId;
 	protected String name;
 	protected String email;
 	protected String password;
 	protected String roleMetaId;
+	protected List<String> tags;
 	
 	protected String forgotPasswordHash;
 	protected Date forgotPasswordDate;
 	
-	public BaseUser() { }
-	public BaseUser(String id) { this.id = id; }
+	public BaseUser() { 
+		creationDate = new Date();
+	}
+	
+	public BaseUser(String id) {
+		creationDate = new Date();
+		this.id = id;
+	}
 	
 	/**
 	 * You can manually set your own ID if desired.
@@ -48,7 +57,15 @@ public class BaseUser extends AccountEnabled {
 	public void setId(String id) {
 		this.id = id;
 	}
+		
+	public Date getCreationDate() {
+		return creationDate;
+	}
 	
+	public void setCreationDate(Date creationDate) {
+		this.creationDate = creationDate;
+	}
+
 	public String getFacebookId() {
 		return facebookId;
 	}
@@ -92,6 +109,14 @@ public class BaseUser extends AccountEnabled {
 		this.roleMetaId = roleMetaId;
 	}
 	
+	public List<String> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<String> tags) {
+		this.tags = tags;
+	}
+
 	public String getForgotPasswordHash() {
 		return forgotPasswordHash;
 	}

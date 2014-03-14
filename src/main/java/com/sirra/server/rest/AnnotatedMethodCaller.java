@@ -202,6 +202,13 @@ public class AnnotatedMethodCaller {
 						values.add(new PlainDate(value));
 					}
 				}
+				else if(parameterType.isEnum()) {
+					if(value == null) {
+						values.add(null);
+					} else {
+						values.add(Caster.cast(parameterType, value));
+					}
+				}
 				else {
 					// Assume complex JSON
 					Object obj = JsonUtil.getInstance().parse(value);

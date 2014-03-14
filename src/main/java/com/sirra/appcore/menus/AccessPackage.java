@@ -2,14 +2,16 @@ package com.sirra.appcore.menus;
 
 import java.util.*;
 
+import com.sirra.appcore.users.*;
+
 public class AccessPackage {
 	protected Set<String> roles;
-	protected Set<String> tags;
+	protected Set<String> keys;
 	protected Set<String> menus;
 	
 	public AccessPackage(String... roleArray) {
 		roles = new HashSet();
-		tags = new HashSet();
+		keys = new HashSet();
 		menus = new HashSet();
 		
 		for(String role: roleArray) {
@@ -17,21 +19,23 @@ public class AccessPackage {
 		}
 	}
 	
-	public void addTag(String tag) {
-		tags.add(tag);
+	public void addKey(String tag) {
+		keys.add(tag);
 	}
 	
 	public void addMenu(String metaId) {
 		menus.add(metaId);
 	}
 	
-	public boolean isApplicable(String roleMetaId) {
+	public boolean isApplicable(BaseUser user) {
+		String roleMetaId = user.getRoleMetaId();
+		
 		if(roles.contains("all")) return true;
 		return roles.contains(roleMetaId);
 	}
 	
-	public Set<String> getTags() {
-		return tags;
+	public Set<String> getKeys() {
+		return keys;
 	}
 	
 	public Set<String> getMenus() {

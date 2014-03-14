@@ -51,7 +51,14 @@ MenuWidget.prototype.highlight = function(metaId) {
 };
 
 MenuWidget.prototype._renderPage = function(metaId) {
-	var menu = this.menuJqLookup[metaId].data("menu");
+	var menuJq = this.menuJqLookup[metaId];
+	
+	if(menuJq == null) {
+		metaId = this.firstMenuMetaId;
+		menuJq = this.menuJqLookup[metaId];
+	}
+	
+	var menu = menuJq.data("menu");
 	
 	History.pushState({}, menu.name, "/" + menu.metaId);
 	trackPage();

@@ -73,7 +73,7 @@ public class ListUtil {
 		String[] pieces = str.split("\n");
 		
 		for(String piece: pieces) {
-			result.add(piece);
+			result.add(piece.trim());
 		}
 		
 		return result;
@@ -88,6 +88,36 @@ public class ListUtil {
 			str.append(it.next());
 			
 			if(it.hasNext()) str.append("\n");
+		}
+		
+		return str.toString();
+	}
+	
+	public static List<String> convertStringToList(String str, String separator) {
+		List<String> result = new ArrayList();
+		
+		if(str == null) return result;
+		str = str.trim();
+		if(str.equals("")) return result;
+		
+		String[] pieces = str.split(separator);
+		
+		for(String piece: pieces) {
+			result.add(piece.trim());
+		}
+		
+		return result;
+	}
+	
+	public static String convertListToString(List<String> strList, String separator) {
+		StringBuffer str = new StringBuffer();
+		
+		Iterator<String> it = strList.iterator();
+		
+		while(it.hasNext()) {
+			str.append(it.next());
+			
+			if(it.hasNext()) str.append(separator);
 		}
 		
 		return str.toString();

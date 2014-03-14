@@ -2,6 +2,8 @@ package com.sirra.appcore.menus;
 
 import java.util.*;
 
+import com.sirra.appcore.users.*;
+
 /**
  * Define the menus in your server bootstrap code.
  * 
@@ -36,21 +38,26 @@ public class MenuSet {
 		packageList.add(currentPackage);
 	}
 	
+	public void setTargetTags(String... tags) {
+		currentPackage = new TagsAccessPackage(tags);
+		packageList.add(currentPackage);
+	}
+	
 	public void assignMenus(String... metaIds) {
 		for(String metaId: metaIds) currentPackage.addMenu(metaId);
 	}
 	
-	public void assignTags(String... tags) {
-		for(String tag: tags) currentPackage.addTag(tag);
+	public void assignKeys(String... keys) {
+		for(String key: keys) currentPackage.addKey(key);
 	}
 	
-	public List<Menu> getMenus(String roleMetaId) {
+	public List<Menu> getMenus(BaseUser user) {
 		List<Menu> finalList = new ArrayList();
 		
 		Set<String> applicableMenus = new HashSet();
 		
 		for(AccessPackage ap: packageList) {
-			if(ap.isApplicable(roleMetaId)) {
+			if(ap.isApplicable(user)) {
 				applicableMenus.addAll(ap.getMenus());
 			}
 		}
@@ -64,15 +71,17 @@ public class MenuSet {
 		return finalList;
 	}
 	
-	public List<String> getTags(String roleMetaId) {
+	public List<String> getKeys(String roleMetaId, BaseUser user) {
 		List<String> finalList = new ArrayList();
 		
 		for(AccessPackage ap: packageList) {
-			if(ap.isApplicable(roleMetaId)) {
-				finalList.addAll(ap.getTags());
+			if(ap.isApplicable(user)) {
+				finalList.addAll(ap.getKeys());
 			}
 		}
 
+		if(user.getTags() != null) finalList.addAll(user.getTags());
+		
 		return finalList;
 	}
 }

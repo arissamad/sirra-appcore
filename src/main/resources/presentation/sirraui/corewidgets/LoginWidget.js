@@ -38,6 +38,13 @@ function LoginWidget() {
 			loginButton.addClass("active");
 			
 			if(loginInfo.isSuccessful) {
+				
+				// If the URL is complex, simply reload now that the user has logged in.
+				if(location.pathname != "/login") {
+					location.reload();
+					return;
+				}
+				
 				gv.user = loginInfo.user;
 				
 				Storage.put("username", username.val());
