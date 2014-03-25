@@ -1,6 +1,7 @@
 package com.sirra.appcore.sql;
 
 import java.util.*;
+import java.util.regex.*;
 
 import javax.persistence.*;
 
@@ -157,8 +158,16 @@ public class SqlSearch {
 			String[] tablePieces = tableStr.split(",");
 			SortedSet<String> tables = new TreeSet();
 			
+			Pattern tableAsPattern = Pattern.compile("[^\\s]+[\\s+]as[\\s+](.+)");
+			
 			for(String t: tablePieces) {
 				String table = t.trim().toLowerCase();
+				
+				Matcher m = tableAsPattern.matcher(table);
+				if(m.find()) {
+					table = m.group(1);
+				}
+				
 				tables.add(table);
 			}
 			

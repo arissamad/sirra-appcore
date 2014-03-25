@@ -3,14 +3,16 @@ package com.sirra.appcore.hibernatetypes;
 import com.sirra.server.json.*;
 
 public class SirraSerializableTypeDescriptor extends BaseStringTypeDescriptor<SirraSerializable> {
-	public static final SirraSerializableTypeDescriptor INSTANCE = new SirraSerializableTypeDescriptor();
 
-	public SirraSerializableTypeDescriptor() {
-		super(SirraSerializable.class);
+	protected Class sirraSerializableImplementationClass;
+	
+	public SirraSerializableTypeDescriptor(Class sirraSerializableImplementationClass) {
+		super(sirraSerializableImplementationClass);
+		this.sirraSerializableImplementationClass = sirraSerializableImplementationClass;
 	}
 	
 	public Class ourClass() {
-		return SirraSerializable.class;
+		return sirraSerializableImplementationClass;
 	}
 
 	public String toString(SirraSerializable value) {

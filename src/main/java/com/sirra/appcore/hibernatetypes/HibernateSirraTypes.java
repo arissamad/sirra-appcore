@@ -13,7 +13,6 @@ public class HibernateSirraTypes {
 		HibernateStarter.addCustomTypeMappings(
 				PlainDateType.INSTANCE, 
 				ListType.INSTANCE, 
-				SirraSerializableType.INSTANCE, 
 				MapType.INSTANCE);
 	}
 }

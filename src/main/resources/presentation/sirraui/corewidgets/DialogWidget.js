@@ -2,6 +2,8 @@ function DialogWidget(title, width, settings) {
 	ClassUtil.mixin(DialogWidget, this, Widget);
 	Widget.call(this, "DialogWidget", true, settings);
 	
+	this.scrollTop = $(window).scrollTop();
+	
 	if(settings == null) {
 		settings = {};
 	}
@@ -45,6 +47,7 @@ DialogWidget.prototype.right = function() {
 };
 
 DialogWidget.prototype.reposition = function() {
+	$(window).scrollTop(this.scrollTop);
 	this.widget.dialog({position:[null, (window.innerHeight/2) - (this.widget.height()/2) - 80]});
 };
 

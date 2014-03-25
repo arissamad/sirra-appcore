@@ -42,6 +42,13 @@ DropDownWidget.prototype._hasSetValue = function() {
 	else return false;
 };
 
+DropDownWidget.prototype.getLabel = function() {
+	var selected = this.select.find(":selected");
+	var label = selected.text();
+	
+	return label;
+};
+
 DropDownWidget.prototype.getValue = function() {
 	var selected = this.select.find(":selected");
 	var id = selected.attr("id");

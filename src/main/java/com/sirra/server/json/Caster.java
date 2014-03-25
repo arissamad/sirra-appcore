@@ -68,6 +68,10 @@ public class Caster {
 				return value; // This can happen when the value is ALREADY a list.
 			}
 		}
+		else if(SirraSerializable.class.isAssignableFrom(parameterType)) {
+			return (SirraSerializable) JsonUtil.getInstance().parse((String) value);
+		}
+			
 		return value;
 	}
 	

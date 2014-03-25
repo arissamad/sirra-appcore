@@ -6,14 +6,16 @@ import org.hibernate.type.descriptor.sql.*;
 import com.sirra.server.json.*;
 
 public class SirraSerializableType extends AbstractSingleColumnStandardBasicType<SirraSerializable> {
-public static final SirraSerializableType INSTANCE = new SirraSerializableType();
+
+	protected String key;
 	
-	public SirraSerializableType() {
-		super( VarcharTypeDescriptor.INSTANCE, SirraSerializableTypeDescriptor.INSTANCE );
+	public SirraSerializableType(Class sirraSerializableImplementationClass) {
+		super( VarcharTypeDescriptor.INSTANCE, new SirraSerializableTypeDescriptor(sirraSerializableImplementationClass));
+		key = sirraSerializableImplementationClass.getName();
 	}
 
 	public String getName() {
-		return "sirraserializable";
+		return key;
 	}
 
 	@Override
