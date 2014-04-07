@@ -3,4 +3,6 @@ function PageHeaderWidget(text) {
 	Widget.call(this, "PageHeaderWidget");
 	
 	this.setValue(text);
+	
+	$(document).find(".mobile-header .title").text(text);
 }

@@ -31,6 +31,28 @@ function MenuWidget(menus) {
 	}
 	
 	popCurrent();
+	
+	// Handle mobile version
+	var clickedOnce = false;
+	var menus = $(document).find(".spine .spine-top .menu-container");
+	
+	$(document).find(".mobile-header .menu-expander").click($IA(this, function(e) {
+		e.stopPropagation();
+		
+		if(menus.is(":visible")) {
+			menus.css("display", "");
+		} else {
+			menus.css("display", "block");
+		}
+		
+		if(!clickedOnce) {
+			clickedOnce = true;
+			$(document).click(function() {
+				menus.css("display", "");
+				log("Boom click");
+			});
+		}
+	}));
 };
 
 MenuWidget.prototype.select = function(metaId) {

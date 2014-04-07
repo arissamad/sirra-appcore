@@ -54,7 +54,7 @@ function LoginWidget() {
 				
 				$(".website-header").remove();
 				
-				$(".spine-top").show();
+				$(".spine-top").css("display", "");
 				
 				current = $(".menu-container");
 				
