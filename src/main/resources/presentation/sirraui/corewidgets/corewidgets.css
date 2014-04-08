@@ -69,6 +69,20 @@ table.login-table .label {
 	text-align: right;
 }
 
+/** For smaller screens **/
+@media not screen and (min-width: 40.5em) {
+	
+	table.login-table .label {
+		font-size: 0.8em;
+		max-width: 50px;
+		vertical-align: middle;
+	}
+	
+	table.login-table .value input {
+		font-size: 1.3em !important;
+	}
+}
+
 table.login-table .value input {
 	padding: 5px 5px 10px 5px;
 	border: 1px solid grey;
