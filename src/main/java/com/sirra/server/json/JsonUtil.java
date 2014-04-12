@@ -199,6 +199,10 @@ public class JsonUtil {
 		    					Setter.set(ss, key, childObject);
 		    				}
 		    				
+		    				if(ss instanceof SirraPersistentSerializable) {
+		    					((SirraPersistentSerializable) ss).setIsClean();
+		    				}
+		    				
 		    				return ss;
 		    			} catch(Exception e) {
 		    				throw new RuntimeException(e);

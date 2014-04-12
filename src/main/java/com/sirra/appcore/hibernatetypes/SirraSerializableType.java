@@ -1,5 +1,8 @@
 package com.sirra.appcore.hibernatetypes;
 
+import org.hibernate.*;
+import org.hibernate.engine.spi.*;
+import org.hibernate.internal.util.compare.*;
 import org.hibernate.type.*;
 import org.hibernate.type.descriptor.sql.*;
 
@@ -17,7 +20,7 @@ public class SirraSerializableType extends AbstractSingleColumnStandardBasicType
 	public String getName() {
 		return key;
 	}
-
+	
 	@Override
 	protected boolean registerUnderJavaType() {
 		return true;

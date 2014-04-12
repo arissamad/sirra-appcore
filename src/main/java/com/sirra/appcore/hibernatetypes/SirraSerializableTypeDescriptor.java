@@ -1,8 +1,10 @@
 package com.sirra.appcore.hibernatetypes;
 
+import org.hibernate.internal.util.compare.*;
+
 import com.sirra.server.json.*;
 
-public class SirraSerializableTypeDescriptor extends BaseStringTypeDescriptor<SirraSerializable> {
+public class SirraSerializableTypeDescriptor<SirraSerializable> extends BaseStringTypeDescriptor<SirraSerializable> {
 
 	protected Class sirraSerializableImplementationClass;
 	
@@ -25,5 +27,15 @@ public class SirraSerializableTypeDescriptor extends BaseStringTypeDescriptor<Si
 		}
 
 		return (SirraSerializable) JsonUtil.getInstance().parse(string);
+	}
+	
+	@Override
+	public boolean areEqual(SirraSerializable one, SirraSerializable another) {
+		if(one != null && another != null && one instanceof SirraPersistentSerializable && another instanceof SirraPersistentSerializable) {
+			SirraPersistentSerializable sps = (SirraPersistentSerializable) one;
+			return !sps.getIsDirty();
+		} else {
+			return EqualsHelper.equals( one, another );
+		}
 	}
 }
