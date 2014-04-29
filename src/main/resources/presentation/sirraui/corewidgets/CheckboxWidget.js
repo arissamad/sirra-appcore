@@ -5,9 +5,9 @@ function CheckboxWidget(settings) {
 
 CheckboxWidget.prototype.setValue = function(value) {
 	if(value == true) {
-		this.input.attr("checked", "yes");
+		this.input.prop("checked", true);
 	} else {
-		this.input.removeAttr("checked");
+		this.input.prop("checked", false);
 	}
 };
 

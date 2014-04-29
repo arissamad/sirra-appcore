@@ -65,7 +65,7 @@ v.moreThan = function(comparisonValue) {
 	return {
 		verify: function(value) {
 			if(value > comparisonValue) return true;
-			else return "The number must be less than " + comparisonValue;
+			else return "The number must be more than " + comparisonValue;
 		}
 	};
 }
@@ -74,7 +74,7 @@ v.moreThanOrEquals = function(comparisonValue) {
 	return {
 		verify: function(value) {
 			if(value >= comparisonValue) return true;
-			else return "The number must be less than or equals to " + comparisonValue;
+			else return "The number must be more than or equals to " + comparisonValue;
 		}
 	};
 }

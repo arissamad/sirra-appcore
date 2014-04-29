@@ -52,6 +52,10 @@ FormWidget.prototype.getCurrentRow = function() {
 	return this.currentTr;
 };
 
+FormWidget.prototype.getWidget = function(metaId) {
+	return this.links[metaId];
+};
+
 FormWidget.prototype.setValue = function(metaId, value) {
 	if(this.links[metaId] != null) this.links[metaId].setValue(value);
 };
