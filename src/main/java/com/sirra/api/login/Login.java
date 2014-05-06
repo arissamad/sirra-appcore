@@ -19,7 +19,7 @@ public class Login extends ApiBase {
 			
 		Finder finder = new Finder();
 	
-		BaseUser user = (BaseUser) finder.findByField(Finder.userClass, "email", username);
+		BaseUser user = (BaseUser) finder.findByField(Finder.userClass, "email", username.toLowerCase());
 		
 		if(user == null) {
 			return fail("Incorrect username.");

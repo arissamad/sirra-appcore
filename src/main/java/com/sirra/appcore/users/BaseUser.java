@@ -84,6 +84,7 @@ public class BaseUser extends AccountEnabled {
 		return email;
 	}
 	public void setEmail(String email) {
+		email = email.toLowerCase();
 		this.email = email;
 	}
 	
