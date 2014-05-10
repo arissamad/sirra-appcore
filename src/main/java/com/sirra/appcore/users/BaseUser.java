@@ -31,6 +31,9 @@ public class BaseUser extends AccountEnabled {
 	protected String forgotPasswordHash;
 	protected Date forgotPasswordDate;
 	
+	protected String thumbUrl; // small
+	protected boolean archived;
+	
 	public BaseUser() { 
 		creationDate = new Date();
 	}
@@ -135,4 +138,20 @@ public class BaseUser extends AccountEnabled {
 	private static String encryptPassword(String password) {
 		return DigestUtils.shaHex(Salt.password(password));
 	}
+	
+	public String getThumbUrl() {
+		return thumbUrl;
+	}
+
+	public void setThumbUrl(String thumbUrl) {
+		this.thumbUrl = thumbUrl;
+	}
+
+	public boolean getArchived() {
+		return archived;
+	}
+
+	public void setArchived(boolean archived) {
+		this.archived = archived;
+	}	
 }
