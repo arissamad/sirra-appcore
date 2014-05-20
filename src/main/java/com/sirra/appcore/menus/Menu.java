@@ -5,10 +5,13 @@ public class Menu {
 	protected String name;
 	protected String jsClass;
 	
-	public Menu(String metaId, String name, String jsClass) {
+	protected boolean isSupertop = false;
+	
+	public Menu(String metaId, String name, String jsClass, boolean isSupertop) {
 		this.metaId = metaId;
 		this.name = name;
 		this.jsClass = jsClass;
+		this.isSupertop = isSupertop;
 	}
 	
 	public String getMetaId() {

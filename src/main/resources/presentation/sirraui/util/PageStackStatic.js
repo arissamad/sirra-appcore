@@ -8,6 +8,8 @@ PageStackStatic.prototype.push = function() {
 	
 	var contents = current.children();
 	
+	var hasLimitedWidth = current.hasClass("limited-width");
+	
 	if(contents.length > 0) {
 		var scrollTop = $(window).scrollTop();
 		
@@ -15,7 +17,8 @@ PageStackStatic.prototype.push = function() {
 			jq: contents.detach(),
 			url: History.getPageUrl(),
 			title: document.title,
-			scrollTop: scrollTop
+			scrollTop: scrollTop,
+			hasLimitedWidth: hasLimitedWidth
 		});	
 	}
 };
@@ -27,6 +30,12 @@ PageStackStatic.prototype.pop = function() {
 	if(this.stack.length == 0) return false;
 	
 	var data = this.stack.pop();
+	
+	if(data.hasLimitedWidth == true) {
+		current.addClass("limited-width");
+	} else {
+		current.removeClass("limited-width");
+	}
 	
 	current.append(data.jq);
 	

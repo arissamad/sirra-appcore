@@ -30,7 +30,11 @@ public class MenuSet {
 	}
 	
 	public void addMenu(String metaId, String name, String jsClass, String... roleMetaIds) {
-		menuList.add(new Menu(metaId, name, jsClass));
+		menuList.add(new Menu(metaId, name, jsClass, false));
+	}
+	
+	public void addSupertopMenu(String metaId, String name, String jsClass, String... roleMetaIds) {
+		menuList.add(new Menu(metaId, name, jsClass, true));
 	}
 	
 	public void setTargetRoles(String... roles) {

@@ -48,55 +48,76 @@ em, .em {
 /** LoginWidget **/
 
 .LoginWidget {
-	padding-top: 100px;
+	border: 1px solid grey;
+	border-radius: 6px;
+	box-shadow: 0 3px 7px #888;
+	padding: 0px 20px 20px 20px;
+	max-width: 600px;
+	margin: 0 auto;
+	margin-top: 30px;
 }
 
 .LoginWidget .header-text {
 	font-size: 30px;
-	padding-bottom: 30px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 	color: #444;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 40px;
 }
 
 table.login-table {
 	margin: 0 auto;
+	width: 80%;
+}
+
+table.login-table td {
+	vertical-align: baseline;
 }
 
 table.login-table .label {
-	font-size: 2em;
+	font-size: 1.5em;
 	padding-right: 20px;
-	padding-top: 10px;
+	padding-top: 15px;
 	padding-bottom: 5px;
 	text-align: right;
+	color: #555;
 }
 
 /** For smaller screens **/
 @media not screen and (min-width: 40.5em) {
 	
+	table.login-table {
+		width: 100%;
+	}
+	
 	table.login-table .label {
-		font-size: 0.8em;
-		max-width: 50px;
-		vertical-align: middle;
+		font-size: 1em;
+		padding-right: 8px;
 	}
 	
 	table.login-table .value input {
-		font-size: 1.3em !important;
+		font-size: 1em !important;
 	}
 }
 
 table.login-table .value input {
-	padding: 5px 5px 10px 5px;
-	border: 1px solid grey;
-	font-size: 2em;
+	padding: 5px 5px 5px 5px;
+	border: 1px solid #999;
+	border-radius: 3px;
+	box-shadow:inset 0px 0px 3px #ccc;
+	font-size: 1.5em;
 	width: 100%;
 	color: #555;
 	margin-bottom: 8px;
+	vertical-align: baseline;
 }
 
 .login-button {
 	display: block;
 	border:1px solid grey;
-	padding: 10px 10px 10px 10px;
-	font-size: 2em;
+	padding: 5px;
+	font-size: 1.6em;
 	color: #555;
 	width: 150px;
 	margin: 0 auto;
@@ -138,6 +159,8 @@ table.login-table .value input {
 	float: right;
 	text-decoration: underline;
 	cursor: pointer;
+	padding-top: 50px;
+	color: #666;
 }
 
 .forgot-password-success {
@@ -443,6 +466,32 @@ table.login-table .value input {
 	font-family: "Quicksand";
 	font-weight: 400;
 	margin: 0px 0px 0px 0px;
+	background: #6DBCDB;
+	color: white;
+	height: 50px;
+}
+
+.MenuWidget .logo {
+	display: inline-block;
+	font-family: Oxygen;
+	font-size: 20px;
+	padding-left: 20px;
+	padding-right: 20px;
+	margin-left: 20px;
+	margin-right: 20px;
+	cursor: pointer;
+	background: rgb(0, 102, 128);
+}
+
+.MenuWidget .logo a{
+	text-decoration: none;
+	color: white;
+}
+
+.MenuWidget .text {
+	display: table-cell;
+	height: 50px;
+	vertical-align: middle;
 }
 
 .MenuWidget .menuItem {
@@ -456,11 +505,12 @@ table.login-table .value input {
 	background: #C4273C;
 }
 
-.MenuWidget .menuName {
+.MenuWidget .menuItem .menuName {
 	display: inline-block;
 	padding: 5px;
 	padding-left: 10px;
 	padding-right: 10px;
+	padding-top: 17px;
 	font-size: 1em;
 }
 
@@ -475,6 +525,73 @@ table.login-table .value input {
 
 .MenuWidget .menuItem .menuName:hover {
 	
+}
+
+.MenuWidget .supertop {
+	display: inline-block;
+	float: right;
+	margin-top: 7px;
+	margin-right: 7px;
+}
+
+.MenuWidget .supertop .oval {
+	border-radius: 35;
+	width: 60px;
+	height: 35px;
+	background: white;
+	cursor: pointer;
+}
+
+.MenuWidget .supertop .oval:hover {
+	background: #FFFBA6;
+}
+
+.MenuWidget .oval .arrow {
+	float: right;
+	color: #aaa;
+	height: 28px;
+	line-height: 28px;
+	margin-right: 7px;
+}
+
+.MenuWidget .supertop .oval:hover .arrow {
+	color: rgb(0, 102, 128);
+}
+
+.MenuWidget .supertop .thumb {
+	margin-top: 5px;
+	margin-left: 5px;
+}
+
+.MenuWidget .supertop-pane {
+	display: none;
+	right: 0px;
+	top: 5px;
+	z-index: 10;
+	border-radius: 5px;
+	min-width: 250px;
+	background: white;
+	border: 1px solid #eee;
+	box-shadow: 2px 2px 8px #ccc;
+	font-family: Quicksand;
+	color: #333;
+	padding: 5px 0px;
+}
+
+.MenuWidget .supertop-pane .supertop-menu-item {
+	padding: 10px 17px;
+	cursor: pointer;
+	border-bottom: 1px solid #eee;
+	transition: 0.1s;
+}
+
+.MenuWidget .supertop-pane .supertop-menu-item:last-child {
+	border-bottom: 1px solid transparent;
+}
+
+.MenuWidget .supertop-pane .supertop-menu-item:hover {
+	background: #C4273C;
+	color: white;
 }
 
 /** LoadingWidget **/
@@ -565,6 +682,11 @@ table.login-table .value input {
 	padding: 20px;
 	background: white;
 	position: relative;
+}
+
+.DivWidget.limited-width {
+	max-width: 800px;
+	margin: 0 auto;
 }
 
 .DropDownWidget {
@@ -685,4 +807,8 @@ table.login-table .value input {
 
 .FullWidthWidget .content {
 	margin: 0 40px;
+}
+
+.UploadWidget input {
+	width: 100%;
 }

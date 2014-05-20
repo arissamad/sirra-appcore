@@ -9,20 +9,29 @@ function MenuWidget(menus) {
 	this.menuParent = menuItemMaster.parent();
 	menuItemMaster.detach();
 	
+	var supertopMenuItemMaster = this.widget.find(".supertop-menu-item");
+	this.supertopMenuParent = supertopMenuItemMaster.parent();
+	supertopMenuItemMaster.detach();
+	
 	this.menuJqLookup = {};
 	this.firstMenuMetaId;
 	
 	for(var i=0; i<menus.length; i++) {
 		var menu = menus[i];
 		
-		var menuJq = menuItemMaster.clone();
+		if(menu.isSupertop == true) {
+			var menuJq = supertopMenuItemMaster.clone();
+			this.supertopMenuParent.append(menuJq);
+		} else {
+			var menuJq = menuItemMaster.clone();
+			this.menuParent.append(menuJq);
+		}
+		
 		menuJq.data("menu", menu);
 		
 		this.menuJqLookup[menu.metaId] = menuJq;
 		
 		menuJq.find(".menuName").setText(menu.name);
-		this.menuParent.append(menuJq);
-		
 		menuJq.click($IA(this, "select", menu.metaId));
 	}
 
@@ -53,6 +62,37 @@ function MenuWidget(menus) {
 			});
 		}
 	}));
+	
+	// Load URL of self photo
+	Rest.get("/api/users/self", {}, $A(this, function(user) {
+		this.widget.find(".thumb img").attr("src", user.thumbUrl);
+	}));
+	
+	this.isVisible = false;
+	
+	this.supertopPane = this.widget.find(".supertop-pane");
+	this.widget.find(".oval").click($IA(this, function(e) {
+		e.stopPropagation();
+		if(this.isVisible == false) {
+			this.turnOnSupertopPane();
+		} else {
+			this.turnOffSupertopPane();
+		}
+	}));
+};
+
+MenuWidget.prototype.turnOnSupertopPane = function() {
+	this.supertopPane.show();
+	this.isVisible = true;
+	
+	$(document).one("click", $IA(this, function() {
+		this.turnOffSupertopPane();
+	}));
+};
+
+MenuWidget.prototype.turnOffSupertopPane = function() {
+	this.supertopPane.hide();
+	this.isVisible = false;
 };
 
 MenuWidget.prototype.select = function(metaId) {
@@ -87,6 +127,7 @@ MenuWidget.prototype._renderPage = function(metaId) {
 	
 	current = $(".app-content");
 	current.empty();
+	current.removeClass("limited-width");
 	
 	var channelClass = window[menu.jsClass];
 	if(channelClass == null) {

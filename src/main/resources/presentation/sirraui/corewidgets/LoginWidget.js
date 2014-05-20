@@ -7,6 +7,8 @@ function LoginWidget() {
 	current = $(".app-content");
 	current.empty();
 	
+	current.removeClass("limited-width");
+	
 	current.append(this.widget);
 	
 	var username = this.widget.find(".username");
