@@ -64,6 +64,10 @@ public class Columns {
 		}
 	}
 	
+	public void setEntityClass(Class entityClass) {
+		this.entityClass = entityClass;
+	}
+	
 	public void add(String col) {
 		columns.add(col);
 	}
@@ -142,8 +146,10 @@ public class Columns {
 				}
 				
 				for(String fieldName: getColumns()) {
-					Object value = data.get(fieldName);
-					Setter.set(object, fieldName, value);
+					if(data.containsKey(fieldName)) {
+						Object value = data.get(fieldName);
+						Setter.set(object, fieldName, value);
+					}
 				}
 				
 				if(extraColumns != null && extraColumns.size() > 0) {

@@ -85,8 +85,17 @@ public class SqlSearch {
 	 */
 	public static <T> List<T> search(Class entityClass, String sql, ExtraColumns extraColumns, SqlParams sqlParams) {
 		Columns columns = new Columns(entityClass);
-		columns.addExtraColumns(extraColumns);
 		
+		if(extraColumns != null) {
+			columns.addExtraColumns(extraColumns);
+		}
+		
+		return privateSearch(entityClass, sql, sqlParams, columns);
+	}
+	
+	// This version allows you to populate just a subset of your entity class.
+	public static <T> List<T> search(Class entityClass, String sql, Columns columns, ExtraColumns extraColumns, SqlParams sqlParams) {
+		columns.setEntityClass(entityClass);
 		return privateSearch(entityClass, sql, sqlParams, columns);
 	}
 	

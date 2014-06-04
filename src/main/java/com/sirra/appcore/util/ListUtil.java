@@ -9,13 +9,25 @@ public class ListUtil {
 	
 	public static <VO> Map<String, VO> mapList(List<VO> theList, String keyAttribute) {
 		Map<String, VO> resultMap = new HashMap();
+		Field field = null;
+		
+		if(theList.size() > 0) {
+			VO vo = theList.get(0);
+			
+			Class currClass = vo.getClass();
+			for(int i=0; i<3; i++) {
+				try {
+					field = currClass.getDeclaredField(keyAttribute);
+				} catch(Exception e) {
+					currClass = vo.getClass().getSuperclass();
+				}
+			}
+			field.setAccessible(true);
+		}
 		
 		for(VO vo: theList) {
 			
-			try {
-				Field field = vo.getClass().getDeclaredField(keyAttribute);
-				field.setAccessible(true);
-				
+			try {	
 				String value = (String) field.get(vo);
 				resultMap.put(value, vo);
 			} catch(Exception e) {
