@@ -29,11 +29,11 @@ public class StackTrace {
 		System.out.println(message);
 		System.out.println(t);
 		
-		EmailMessage em = new EmailMessage(Template.get("error-occurred.html",
+		EmailMessage em = new EmailMessage(Template.get("emails/error-occurred.html",
 				"summary", message,
 				"errorDetails", ExceptionUtil.getStackTrace(t)));
 		
-		Email.send(appName + " Error", em, EmailPerson.me());
+		Email.send(appName + " Error", em, EmailPerson.defaultSender(), EmailPerson.me());
 	}
 	
 	/**
@@ -43,10 +43,10 @@ public class StackTrace {
 		System.out.println(message);
 		System.out.println(t);
 		
-		EmailMessage em = new EmailMessage(Template.get("error-occurred.html",
+		EmailMessage em = new EmailMessage(Template.get("emails/error-occurred.html",
 				"summary", message,
 				"errorDetails", ExceptionUtil.getStackTrace(t)));
 		
-		Email.send(appName + " Error", em, EmailPerson.me());
+		Email.send(appName + " Error", em, EmailPerson.defaultSender(), EmailPerson.me());
 	}
 }
