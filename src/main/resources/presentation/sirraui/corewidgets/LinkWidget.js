@@ -1,6 +1,6 @@
-function LinkWidget(text, action) {
+function LinkWidget(text, action, settings) {
 	ClassUtil.mixin(LinkWidget, this, Widget);
-	Widget.call(this, "LinkWidget");
+	Widget.call(this, "LinkWidget", true, settings);
 	
 	this.widget.disableTextSelect();
 	if(!text != null) this.setValue(text);
