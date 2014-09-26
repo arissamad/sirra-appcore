@@ -36,8 +36,9 @@ public class SqlInConstraint {
 	public static String quoteAndEscape(String incoming) {
 		if(incoming.indexOf("'") < 0 && incoming.indexOf("?") < 0) return "'" + incoming + "'";
 		else {
-			String temp = "E'" + incoming.replaceAll("'", "\\\\'") + "'";
-			return temp.replaceAll("\\?", "\\\\?");
+			String temp = "'" + incoming.replaceAll("'", "''") + "'";
+			String finalTemp = temp.replaceAll("\\?", "\\\\?");
+			return finalTemp;
 		}
 	}
 }
