@@ -3,7 +3,7 @@
 	
 	<groupId>com.sirra</groupId>
 	<artifactId>sirra-appcore</artifactId>
-	<version>1.51</version>
+	<version>1.52</version>
 	<packaging>jar</packaging>
 	
 	<name>sirra-appcore</name>
@@ -31,7 +31,7 @@
 		<dependency>
 			<groupId>com.sirra</groupId>
 			<artifactId>sirra-core</artifactId>
-			<version>1.27</version>
+			<version>1.29</version>
 		</dependency>
 		
 		<dependency>
@@ -77,7 +77,7 @@
 			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
-				<version>0.8</version>
+				<version>0.10</version>
 				<configuration>
 					<message>Maven artifacts for ${project.version}</message>
 					<!-- git commit message -->
