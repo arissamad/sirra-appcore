@@ -23,6 +23,8 @@ public class OncePerDay {
 		
 		Lookup lookup = (Lookup) SirraSession.get().getHibernateSession().get(Lookup.class, key);
 		
+		System.out.println("Lookup is " + lookup);
+		
 		if(lookup == null) {
 			lookup = new Lookup();
 			lookup.setKey(key);
@@ -31,15 +33,24 @@ public class OncePerDay {
 			SirraSession.get().getHibernateSession().saveOrUpdate(lookup);
 			SirraSession.get().commitButLeaveRunnning();
 			
+			System.out.println("Committed lookup: " + lookup.getKey() + ": " + lookup.getValue());
+			
 			return true;
 		} else {
 			String currentValue = lookup.getValue();
+			
+			System.out.println("Current value: " + currentValue);
+			
 			if(value.equals(currentValue)) {
 				// Already ran
+				System.out.println("Already ran");
 				return false;
 			} else {
 				lookup.setValue(value);
 				SirraSession.get().getHibernateSession().saveOrUpdate(lookup);
+				SirraSession.get().commitButLeaveRunnning();
+				
+				System.out.println("Resaved lookup.");
 				return true;
 			}
 		}
