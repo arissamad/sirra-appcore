@@ -27,6 +27,7 @@ public class DailyProcess implements Runnable {
 
 	protected Thread thread;
 	
+	protected long randomDelay;
 	protected int hour;
 	protected int minute;
 	
@@ -40,6 +41,10 @@ public class DailyProcess implements Runnable {
 	private DailyProcess(int hour, int minute) {
 		this.hour = hour;
 		this.minute = minute;
+
+		// DailyProcess has a random delay between 0 and 5 seconds. This helps OncePerDay.canIRunToday() ensure only one core runs the DailyProcess.
+		randomDelay = (long) (Math.random()*5000d);
+		System.out.println("DailyProcess randomDelay: " + randomDelay);
 		
 		friendlyTime = pad(hour) + ":" + pad(minute);
 		
@@ -76,6 +81,10 @@ public class DailyProcess implements Runnable {
 			
 			System.out.println("DailyProcess: Waking up to run scheduled processes.");
 			
+			if(!OncePerDay.canIRunToday("daily-process")) {
+				System.out.println("... but not running today because another core has run today's daily process already.");
+				continue;
+			}
 			
 			for(DailyProcessor dailyProcessor: ProcessorList.getList()) {
 				
@@ -116,6 +125,15 @@ public class DailyProcess implements Runnable {
 			runTimeTodayDate = runTimeToday.getTime();
 		}
 		
-		return runTimeTodayDate.getTime() - currDate.getTime();
+		long runTime = runTimeTodayDate.getTime() - currDate.getTime();
+		
+		if(false) {
+			// Debugging
+			runTime = 0;
+		}
+		
+		runTime += randomDelay;
+		
+		return runTime;
 	}
 }
