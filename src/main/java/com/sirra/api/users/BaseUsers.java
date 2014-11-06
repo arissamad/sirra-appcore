@@ -26,7 +26,7 @@ public abstract class BaseUsers extends ApiBase {
 	@BY_ID
 	@DefaultAttributes({"id", "name", "email", "title", "roleMetaId", "thumnUrl"})
 	public BaseUser getUser(String userId) {
-		BaseUser user = get(Finder.userClass, userId);
+		BaseUser user = (BaseUser) get(Finder.userClass, userId);
 		return user;
 	}
 	
@@ -37,7 +37,7 @@ public abstract class BaseUsers extends ApiBase {
 		"sendEmail", "notes"})
 	public void updateUser(String userId, String name, String email, String password, String roleMetaId)
 	{	
-		BaseUser user = get(Finder.userClass, userId);
+		BaseUser user = (BaseUser) get(Finder.userClass, userId);
 		
 		if(user == null) {
 			user = instantiateUser();
@@ -58,7 +58,7 @@ public abstract class BaseUsers extends ApiBase {
 	@DELETE
 	@BY_ID
 	public void deleteUser(String userId) {
-		BaseUser user = get(Finder.userClass, userId);
+		BaseUser user = (BaseUser) get(Finder.userClass, userId);
 		delete(user);
 	}
 	

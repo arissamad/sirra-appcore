@@ -2,8 +2,6 @@ package com.sirra.appcore.email;
 
 import javax.mail.*;
 
-import com.sirra.appcore.util.*;
-import com.sirra.appcore.util.config.*;
 import com.sirra.server.util.*;
 
 public class SMTPAuthenticator extends Authenticator {

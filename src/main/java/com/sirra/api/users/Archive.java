@@ -12,7 +12,7 @@ public class Archive extends ApiBase {
 	@DELETE
 	@BY_ID
 	public void archiveUser(String userId) {
-		BaseUser user = get(Finder.userClass, userId);
+		BaseUser user = (BaseUser) get(Finder.userClass, userId);
 		user.setArchived(true);
 		
 		save(user);
@@ -21,7 +21,7 @@ public class Archive extends ApiBase {
 	@POST
 	@BY_ID
 	public void restoreUser(String userId) {
-		BaseUser user = get(Finder.userClass, userId);
+		BaseUser user = (BaseUser) get(Finder.userClass, userId);
 		user.setArchived(false);
 		
 		save(user);
