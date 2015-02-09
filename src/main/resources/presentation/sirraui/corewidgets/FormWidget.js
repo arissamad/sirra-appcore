@@ -22,6 +22,8 @@ function FormWidget(settings) {
 	
 	if(this.settings.has("tableWidth")) this.table.width(this.settings.get("tableWidth"));
 	
+	if(this.settings.has("css")) this.widget.css(this.settings.get("css"));
+	
 	this.links = {};
 	this.verifiers = {};
 }

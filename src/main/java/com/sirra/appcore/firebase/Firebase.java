@@ -49,4 +49,15 @@ public class Firebase {
 			throw new RuntimeException(e);
 		}
 	}
+	
+	public void postWithoutAccount(String path, Object payload) {
+		JsonRestCaller caller = new JsonRestCaller("https://" + firebaseInstance + ".firebaseio.com/" + path + ".json");
+		caller.setPayload(JsonUtil.getInstance().convert(payload).toString());
+		try {
+			caller.executeCall();
+		} catch(RestException e) {
+			StackTrace.notify(e, "Couldn't put data to firebase path \"" + path + "\" with payload \"" + payload + "\n");
+			throw new RuntimeException(e);
+		}
+	}
 }

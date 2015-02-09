@@ -80,7 +80,7 @@ ResetPasswordWidget.prototype.render = function() {
 		Rest.post("/api/users/resetpassword", {hash: this.hash, password: fw.getValue("password")}, $A(this, function(results) {
 			if(results.isSuccessful == true) {
 				this.marker.activate();
-				new TextWidget("You have successfully reset your password. Click below to proceed to login to SirraTeam.");
+				new TextWidget("You have successfully reset your password. Click below to proceed to login to VizoServer.");
 				new LW(2);
 				var goButton = new ButtonWidget("Go to login screen", $A(this, function() {
 					goButton.loading();

@@ -14,8 +14,12 @@ function DialogWidget(title, width, settings) {
 	
 	settings.dialogClass = "sirra-dialog";
 	
-	settings.close = $IA(this, function() {
+	settings.close = $IA(this, function(e) {
 		this.widget.remove();
+		
+		if(e != null) {
+			e.stopPropagation();
+		}
 	});
 	
 	this.widget.dialog(settings);

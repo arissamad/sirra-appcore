@@ -26,15 +26,20 @@ function TableWidget(context, settings) {
 TableWidget.prototype.addSelectorColumn = function(action) {
 	var ownerObject = this;
 	
-	this.addHeader("");
+	this.addHeader("", {css: {width: "20px"}});
 	this.addColumn(function(item) {
 		var cb = new CheckboxWidget(false, {classes: ["selection"]});
 		ownerObject.selectors.push({cb: cb, item: item});
 		if(action != null) {
-			cb.widget.click(function() {
+			cb.widget.click(function(e) {
+				e.stopPropagation();
 				action.call(cb, item);
 			});
 		}
+		
+		current.click(function() {
+			cb.input.trigger("click");
+		});
 	});
 };
 
@@ -221,4 +226,12 @@ TableWidget.prototype.refresh = function() {
 
 TableWidget.prototype.refreshRow = function(id, td) {
 	this.singleLoaderAction.call(id, td.parent());
+};
+
+// Call this when you are using renderList() to render a static list
+TableWidget.prototype.refreshRowWithItem = function(item, td) {
+	var newTr = this._createRow(item);
+	var tr = td.parent();
+	tr.after(newTr);
+	tr.remove();
 };
