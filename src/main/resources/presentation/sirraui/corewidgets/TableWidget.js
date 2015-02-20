@@ -220,7 +220,7 @@ TableWidget.prototype.render = function() {
 };
 
 TableWidget.prototype.refresh = function() {
-	this.pageJq.setText("" + (this.page+1));
+	if(this.pageJq != null) this.pageJq.setText("" + (this.page+1));
 	this.loaderAction.call();
 };
 
