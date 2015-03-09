@@ -23,14 +23,27 @@ public class SqlParams {
 	
 	protected List<Sort> sortColumns;
 	
+	// When set to true, the SQL won't automatically filter on accounts
+	protected boolean includeAllAccounts;
+	
 	public SqlParams() {
 		constraints = new ArrayList();
 		orConstraints = new HashMap();
 		sortColumns = new ArrayList();
+		
+		includeAllAccounts = false;
 	}
 	
 	public void addConstraint(String constraint) {
 		constraints.add(constraint);
+	}
+	
+	public void setIncludeAllAccounts() {
+		includeAllAccounts = true;
+	}
+	
+	public boolean getIncludeAllAccounts() {
+		return includeAllAccounts;
 	}
 	
 	public List<String> getAllConstraints() {

@@ -195,7 +195,7 @@ public class SqlSearch {
 			}
 			
 			for(String table: tables) {
-				if(!sharedTables.contains(table.toLowerCase())) {
+				if(!sharedTables.contains(table.toLowerCase()) && sqlParams.getIncludeAllAccounts() == false) {
 					sqlParams.addConstraint(table + ".accountId = '" + accountId + "'");
 				}
 				
