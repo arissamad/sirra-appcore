@@ -15,7 +15,7 @@ PageStackStatic.prototype.push = function() {
 		
 		this.stack.push({
 			jq: contents.detach(),
-			url: History.getPageUrl(),
+			url: location.href,
 			title: document.title,
 			scrollTop: scrollTop,
 			hasLimitedWidth: hasLimitedWidth

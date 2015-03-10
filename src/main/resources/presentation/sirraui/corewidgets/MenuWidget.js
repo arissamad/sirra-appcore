@@ -102,6 +102,10 @@ MenuWidget.prototype.select = function(metaId) {
 	this._renderPage(metaId);
 }
 
+MenuWidget.prototype.hasSelectedMenu = function() {
+	return this.menuParent.find(".menuItem.selected").length > 0;
+};
+
 MenuWidget.prototype.highlight = function(metaId) {
 	this.menuParent.find(".menuItem").removeClass("selected");
 	

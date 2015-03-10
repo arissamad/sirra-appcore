@@ -23,6 +23,10 @@ function TableWidget(context, settings) {
 	this.searchTerm = null;
 }
 
+TableWidget.prototype.setClickHandler = function(rowClickAction) {
+	this.rowClickAction = rowClickAction;
+};
+
 TableWidget.prototype.addSelectorColumn = function(action) {
 	var ownerObject = this;
 	
@@ -109,6 +113,12 @@ TableWidget.prototype._createRow = function(item) {
 		}
 	}
 	
+	if(this.rowClickAction != null) {
+		newTr.click($IA(this, function() {
+			this.rowClickAction.call(item);
+		}));
+	}
+	
 	return newTr;
 };
 
@@ -174,7 +184,7 @@ TableWidget.prototype.setLoader = function(loaderAction) {
 	});
 };
 
-TableWidget.prototype.setLoaderResource = function(resourcePath, apiParameters) {
+TableWidget.prototype.setLoaderResource = function(resourcePath, apiParameters, overrideLimit) {
 	
 	this.loaderAction = $A(this, function() {
 		this.table.css("opacity", 0.3);
@@ -187,6 +197,8 @@ TableWidget.prototype.setLoaderResource = function(resourcePath, apiParameters) 
 		
 		parameters._page = this.page;
 		parameters._limit = 10;
+		
+		if(overrideLimit != null) parameters._limit = overrideLimit;
 		
 		if(this.searchTerm != null) {
 			parameters._search = this.searchTerm;

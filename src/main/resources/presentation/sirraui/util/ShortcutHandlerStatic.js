@@ -5,6 +5,9 @@ function ShortcutHandlerStatic() {
 
 ShortcutHandlerStatic.prototype.addShortcut = function(action) {
 	var method = function(e) {
+		var target = $(e.target);
+		if(target.prop("tagName") == "INPUT") return; // Don't handle shortcut if it was from an input field
+		
 		action.call(e);
 	};
 	this.jqDoc.on("keydown", method);
