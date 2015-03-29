@@ -19,6 +19,12 @@ public class ExtraColumns {
 		}
 	}
 	
+	public void addColumns(String... cols) {
+		for(int i=0; i<cols.length; i++) {
+			columns.add(cols[i]);
+		}
+	}
+	
 	public List<String> getColumns() {
 		return columns;
 	}

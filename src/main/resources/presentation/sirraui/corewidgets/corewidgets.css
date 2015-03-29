@@ -428,6 +428,11 @@ table.login-table .value input {
 	vertical-align: middle;
 }
 
+.TableWidget.clickable-rows > table > tbody > tr:hover > td {
+	background: rgb(240, 247, 255);
+	cursor: pointer;
+}
+
 .TableWidget > table > tfoot > tr > td {
 	background: white;
 	height: 10px;

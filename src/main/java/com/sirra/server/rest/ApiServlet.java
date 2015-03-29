@@ -96,6 +96,9 @@ public class ApiServlet extends HttpServlet {
     protected void execute(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException
     {
+		request.setCharacterEncoding("UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		
     	String apiPath = request.getPathInfo();
     	HttpType httpMethod = HttpType.valueOf(request.getMethod());
     	

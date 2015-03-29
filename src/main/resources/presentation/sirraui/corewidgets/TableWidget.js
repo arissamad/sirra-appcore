@@ -25,6 +25,8 @@ function TableWidget(context, settings) {
 
 TableWidget.prototype.setClickHandler = function(rowClickAction) {
 	this.rowClickAction = rowClickAction;
+	
+	this.widget.addClass("clickable-rows");
 };
 
 TableWidget.prototype.addSelectorColumn = function(action) {
@@ -115,6 +117,7 @@ TableWidget.prototype._createRow = function(item) {
 	
 	if(this.rowClickAction != null) {
 		newTr.click($IA(this, function() {
+			current = newTr.children("td").first();
 			this.rowClickAction.call(item);
 		}));
 	}
