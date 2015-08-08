@@ -17,36 +17,15 @@ public class Login extends ApiBase {
 	@Parameters({"username", "password"})
 	public Map login(String username, String password) {
 		Finder finder = new Finder();
-		
-		// Superuser
-		boolean isSuperUser = false;
-		if(username.indexOf("::") >= 0) {
-			String[] pieces = username.split("::");
-			
-			username = pieces[1];
-			
-			String adminUsername = pieces[0];
-			if(adminUsername.equals("aris@quickschools.com")) {
-				BaseUser adminUser = (BaseUser) finder.findByField(Finder.userClass, "email", adminUsername);
-				
-				if(adminUser != null) {
-					if(adminUser.verifyPassword(password)) {
-						isSuperUser = true;
-					}
-				}
-			}
-		}
-			
+	
 		BaseUser user = (BaseUser) finder.findByField(Finder.userClass, "email", username.toLowerCase());
 		
 		if(user == null) {
 			return fail("Incorrect username.");
 		}
-		
-		if(!isSuperUser) {
-			if(!user.verifyPassword(password)) {
+
+		if(!user.verifyPassword(password)) {
 				return fail("Incorrect password.");
-			}
 		}
 		
 		UserSession userSession = UserSession.newUserSession(username, user.getId(), user.getAccountId());
