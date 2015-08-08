@@ -55,10 +55,9 @@ public class UserSession {
 				
 				UserSession userSession = lookup.get(userSessionId);
 				
-				if(userSession == null) {
+				if(userSession != null) {
 					userSession = new Finder().findByField(UserSession.class, "sessionId", userSessionId);
-					
-					if(userSession != null) lookup.put(userSessionId, userSession);
+					lookup.put(userSessionId, userSession);
 				}
 				
 				return userSession;
