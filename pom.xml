@@ -3,7 +3,7 @@
 	
 	<groupId>com.sirra</groupId>
 	<artifactId>sirra-appcore</artifactId>
-	<version>1.65</version>
+	<version>1.67</version>
 	<packaging>jar</packaging>
 	
 	<name>sirra-appcore</name>

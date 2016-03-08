@@ -223,6 +223,11 @@ table.login-table .value input {
 /** InputWidget **/
 .InputWidget {
 	cursor: text;
+	vertical-align: baseline;
+}
+
+.InputWidget input {
+	vertical-align: baseline;
 }
 
 .InputWidget input, .TextAreaWidget textarea {
