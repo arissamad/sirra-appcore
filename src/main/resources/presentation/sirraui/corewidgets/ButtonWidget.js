@@ -20,6 +20,8 @@ ButtonWidget.prototype.loading = function() {
 	
 	this.lw = new LoadingWidget();
 	this.widget.off("click");
+	
+	gv.currLoadingButton = this;
 };
 
 ButtonWidget.prototype.doneLoading = function() {

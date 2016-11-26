@@ -2,6 +2,9 @@ package com.sirra.appcore.firebase;
 
 import com.sirra.server.json.*;
 import com.sirra.server.session.*;
+
+import java.util.*;
+
 import com.sirra.appcore.rest.*;
 import com.sirra.appcore.util.*;
 
@@ -12,6 +15,20 @@ import com.sirra.appcore.util.*;
  */
 public class Firebase {
 	
+	/**
+	 * [aris 2016-06] Instead of using this, you should include the Firebase maven project
+	 * and do something like this:
+	 * 
+	 * 	Map map = new HashMap();
+	 *	map.put("operationType", operationType);
+	 *	map.put("progress", progressPercentage);
+	 *	
+	 *	Firebase firebase = new Firebase("https://" + com.sirra.appcore.firebase.Firebase.getFirebaseInstance() + ".firebaseio.com/live/" + 
+	 *			SirraSession.get().getAccountId());
+ 	 *
+	 *	firebase.setValue(map);
+	 */
+	
 	protected static String firebaseInstance;
 	
 	/**
@@ -20,6 +37,10 @@ public class Firebase {
 	 */
 	public static void setFirebaseInstance(String theFirebaseInstance) {
 		firebaseInstance = theFirebaseInstance;
+	}
+	
+	public static String getFirebaseInstance() {
+		return firebaseInstance;
 	}
 	
 	protected static Firebase instance;

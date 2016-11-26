@@ -71,6 +71,11 @@ RestStatic.prototype.call = function(httpMethod, path, parameters, action) {
 	    	
 	    	var dialog = new DialogWidget("Error", 500);
 	    	new TextWidget("Error code: " + json.errorCode + "\n\n" + json.errorMessage);
+	    	
+	    	if(gv.currLoadingButton != null) {
+	    		gv.currLoadingButton.doneLoading();
+	    		delete gv.currLoadingButton;
+	    	}
 	    }
 	});
 };
