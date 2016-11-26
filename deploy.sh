@@ -1,3 +1,5 @@
+# Note: Beacuse our GitHub account now uses two-factor auth, you must generate a personal access token
+# in GitHub and then use that as the github password in ~/.m2/settings.xml
 if [ -z $1 ]; then
   echo You need a commit message.
   exit 1
